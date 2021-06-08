@@ -1,0 +1,26 @@
+body {
+    background-color: #dcdde1;
+}
+
+.login {
+    position: absolute;
+    top: 30%;
+    left: 35%;
+    width: 25%;
+    height: 35%;
+    background: #353b48;
+    border-radius: 15px;
+    border: solid #353b48;
+    box-shadow: 8px 8px 10px 0 #818181;
+    color: white;
+}
+
+fieldset {
+    border-color: transparent;
+}
+
+#logButton {
+    background-color: #dcdde1;
+    border-color: #dcdde1;
+    border-radius: 15px;
+}
