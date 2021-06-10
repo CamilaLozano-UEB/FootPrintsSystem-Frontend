@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Four Pets Citizens</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/styles.css" type="text/css">
+
+
+</head>
+
+<nav>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="register-tab" data-toggle="tab" href="#register" role="tab"
+               aria-controls="register" aria-selected="true">Registrar Mascota</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="update-tab" data-toggle="tab" href="#update" role="tab" aria-controls="update"
+               aria-selected="false">Actualizar Mascota</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="find-tab" data-toggle="tab" href="#find" role="tab" aria-controls="find"
+               aria-selected="false">Tabla de Mascotas</a>
+        </li>
+    </ul>
+</nav>
+
+<body>
+
+<script type="module" src="javascript/main.js"></script>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="register" role="tabpanel" aria-labelledby="register-tab">
+
+        <form action="Createpatsform" method="post" autocomplete="off" id="formC" name="formC">
+            <fieldset>
+
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="tab-pane fade" id="update" role="tabpanel" aria-labelledby="update-tab">
+        <form action="Uppetsform" method="post" autocomplete="off" name="formU" id="formU">
+            <fieldset>
+
+            </fieldset>
+        </form>
+
+    </div>
+
+    <div class="tab-pane fade" id="find" role="tabpanel" aria-labelledby="find-tab">
+
+        <form name="formT" id=="formT">
+
+        </form>
+    </div>
+</div>
+</body>
+
+</html>
