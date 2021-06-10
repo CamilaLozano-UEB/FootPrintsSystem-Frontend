@@ -23,6 +23,22 @@
     </form>
     <a type="button" href="">Registrarse</a>
 </div>
+<script type="text/javascript">
+    var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners';
 
+    let username = 'pip';
+    let password = '15632';
+
+    let headers = new Headers();
+
+    //headers.append('Content-Type', 'text/json');
+    headers.set('Authorization', 'Basic ' + btoa(username + ":" + password));
+
+    fetch(url, {method:'GET',
+        headers: headers,
+    })
+        .then(response => response.json())
+        .then(json => console.log(json));
+</script>
 </body>
 </html>

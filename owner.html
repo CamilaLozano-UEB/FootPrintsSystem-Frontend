@@ -42,7 +42,6 @@
 
 <body>
 
-<script type="module" src="javascript/main.js"></script>
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="register" role="tabpanel" aria-labelledby="register-tab" align="center">
 
@@ -268,31 +267,31 @@
 
         <br>
         <div style="float: left; width: 50%;">
-        <table id="tableCases" class="table table-striped">
-            <thead>
-            <tr>
-                <th scope="col">ID de la visita</th>
-                <th scope="col">Id de la mascota</th>
-                <th scope="col">fecha</th>
-                <th scope="col">tipo</th>
-                <th scope="col">descripción</th>
-                <th scope="col">microchip</th>
-            </tr>
-            </thead>
-        </table>
+            <table id="tableCases" class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">ID de la visita</th>
+                    <th scope="col">Id de la mascota</th>
+                    <th scope="col">fecha</th>
+                    <th scope="col">tipo</th>
+                    <th scope="col">descripción</th>
+                    <th scope="col">microchip</th>
+                </tr>
+                </thead>
+            </table>
         </div>
         <div style="float: left; width: 50%;">
-        <table id="tableVisit" class="table table-striped">
-            <thead>
-            <tr>
-                <th scope="col">ID de la Case</th>
-                <th scope="col">Id de la mascota</th>
-                <th scope="col">fecha</th>
-                <th scope="col">tipo</th>
-                <th scope="col">descripción</th>
-            </tr>
-            </thead>
-        </table>
+            <table id="tableVisit" class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">ID de la Case</th>
+                    <th scope="col">Id de la mascota</th>
+                    <th scope="col">fecha</th>
+                    <th scope="col">tipo</th>
+                    <th scope="col">descripción</th>
+                </tr>
+                </thead>
+            </table>
         </div>
     </div>
     <div class="tab-pane fade" id="Upuser" role="tabpanel" aria-labelledby="Upuser-tab" align="center">
@@ -341,6 +340,29 @@
         </form>
     </div>
 </div>
+<script type="text/javascript">
+    var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners';
+    var data = {
+        "username": "pip",
+        "password": "15632",
+        "email": "adssda",
+        "person_id": 19530,
+        "name": "el pepe",
+        "address": "avenida tu corazon",
+        "neighborhood": "fontibon"
+    };
+
+    fetch(url, {
+        method: 'POST', // or 'PUT'
+        body: JSON.stringify(data), // data can be `string` or {object}!
+        headers: {
+            'Content-Type': 'application/json, charset=UTF-8',
+            'Content-Encoding': 'Accept'
+        }
+    }).then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => console.log('Success:', response));
+</script>
 </body>
 
 </html>
