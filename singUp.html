@@ -5,7 +5,7 @@
     <title>FourPawsCitizens - SingUp</title>
     <link rel="stylesheet" href="CSS/Styles.css" type="text/css">
 </head>
-<body>
+<body class="singupBack">
 <div class="SelectForm">
     <label for="listSingUp"> Seleccione rol: </label>
     <select name="listSingUp" id="listSingUp" onchange="ShowFields()">
@@ -23,9 +23,9 @@
 
 <script type="text/javascript">
     function ShowFields() {
-        var fieldSetForm = document.getElementById("fieldSetForm")
-        var listTitlesVet = ["Nombre de la Veterinaria: ", "Direccion: ", "Localidad:"]
-        var listTitlesOwner = ["Usuario: ", "Contraseña:", "Email: ", "Documento de identidad: ", "Nombre Completo: ", "Direccion: ", "Localidad: "]
+        var fieldSetForm = document.getElementById("fieldSetForm");
+        var listTitlesVet = ["Nombre de la Veterinaria: ", "Direccion: ", "Localidad:"];
+        var listTitlesOwner = ["Usuario: ", "Contraseña:", "Email: ", "Documento de identidad: ", "Nombre Completo: ", "Direccion: ", "Localidad: "];
         var listAtributesVet = ["nameVet", "addressVet", "neigborhoodVet"];
         var listAtributesOwner = ["username", "password", "email", "person_id", "name", "address", "neighborhood"];
         var role = document.getElementById("listSingUp").value;
