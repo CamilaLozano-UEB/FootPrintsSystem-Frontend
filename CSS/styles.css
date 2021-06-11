@@ -1,10 +1,14 @@
 body {
     background-color: #dcdde1;
 }
+tables {
+    background-color: #FFFFFF44;
+}
 
 .login {
+    font-family: Verdana;
     position: absolute;
-    top: 30%;
+    top: 15%;
     left: 35%;
     width: 25%;
     height: 35%;
@@ -20,13 +24,40 @@ fieldset {
 }
 
 #logButton {
+    font-family: Verdana;
     background-color: #dcdde1;
     border-color: #dcdde1;
-    border-radius: 15px;
+    border-radius: 18px;
 }
 
 a {
+    font-family: Verdana;
     background-color: #dcdde1;
     border-color: #dcdde1;
-    border-radius: 15px;
+    border-radius: 22px;
+}
+
+.ownerBack{
+
+    background-image: url("../imgs/1pets.jpeg") ;
+    background-size: cover;
+    background-position: revert;
+}
+.loginBack{
+
+    background-image: url("../imgs/2pets.jpeg") ;
+    background-size: cover;
+    background-position: center;
+}
+.configureStyleMainForms{
+    position: absolute;
+    left: 1%;
+    width: 600px;
+    background: #FFFFFF44;
+    padding: 30px;
+    border-radius: 20px;
+}
+.configureStyleMainBox{
+    background: #FFFFFF44;
+    border-radius: 20px;
 }
