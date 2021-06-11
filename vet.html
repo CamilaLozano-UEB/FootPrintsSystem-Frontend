@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="Javascript/PAG.js"></script>
     <link rel="stylesheet" href="css/styles.css" type="text/css">
 </head>
 <body class="vetBack">
@@ -88,6 +89,25 @@
 
         <div class="TableVisit" id="TableVisit">
                 <h2 class="titles">Tabla de Visitas de Mascotas</h2>
+
+            <nav>
+                <ul class="pagination justify-content-center">
+                    <li id="previousTen" class="page-item">
+                        <a class="page-link" href="#">&laquo;10&laquo;</a>
+                    </li>
+                    <li id="previous" class="page-item">
+                        <a class="page-link" href="#">&laquo;</a>
+                    </li>
+                    <li id="page" class="page-item disabled"><a class="page-link" href="#">1</a></li>
+                    <li id="next" class="page-item">
+                        <a class="page-link" href="#">&raquo;</a>
+                    </li>
+                    <li id="next10" class="page-item">
+                        <a class="page-link" href="#">&raquo;10&raquo;</a>
+                    </li>
+                    <li id="total" class="page-item disabled"><a class="page-link">1</a></li>
+                </ul>
+            </nav>
                 <table id="tablePets" class="table table-striped">
                     <thead>
                     <tr>
