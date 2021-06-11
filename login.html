@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -31,8 +31,8 @@
 
     let headers = new Headers();
 
-    //headers.append('Content-Type', 'text/json');
-    headers.set('Authorization', 'Basic ' + btoa(username + ":" + password));
+    headers.append('Content-Type', 'text/json');
+    headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
 
     fetch(url, {method:'GET',
         headers: headers,

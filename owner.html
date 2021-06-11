@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html>
 
 <head>
@@ -343,10 +343,10 @@
 <script type="text/javascript">
     var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners';
     var data = {
-        "username": "pip",
+        "username": "pio",
         "password": "15632",
         "email": "adssda",
-        "person_id": 19530,
+        "person_id": 130,
         "name": "el pepe",
         "address": "avenida tu corazon",
         "neighborhood": "fontibon"
@@ -356,11 +356,9 @@
         method: 'POST', // or 'PUT'
         body: JSON.stringify(data), // data can be `string` or {object}!
         headers: {
-            'Content-Type': 'application/json, charset=UTF-8',
-            'Content-Encoding': 'Accept'
+            'Content-Type': 'application/json'
         }
     }).then(res => res.json())
-        .catch(error => console.error('Error:', error))
         .then(response => console.log('Success:', response));
 </script>
 </body>
