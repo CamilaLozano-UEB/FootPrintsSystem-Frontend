@@ -47,20 +47,24 @@
         var rolhref=role+".html";
         if (role === "owner")
             role = "owners";
-        let url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/' + role;
+        if (role != "owner"&&role != "vet"&&role != "official"){
+            alert("Contraseña o usuario erroneos. Intente de nuevo");
+            location.reload();
+        }else{
+            let url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/' + role;
 
-        let username = document.getElementById("user").value;
-        let password = document.getElementById("password").value;
-        let headers = new Headers();
+            let username = document.getElementById("user").value;
+            let password = document.getElementById("password").value;
+            let headers = new Headers();
 
-        headers.append('Content-Type', 'text/json');
-        headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
+            headers.append('Content-Type', 'text/json');
+            headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
 
-        fetch(url, {
-            method: 'GET',
-            headers: headers,
-        }).then(response => response.ok).then(window.location.href= rolhref+"?"+username);
-
+            fetch(url, {
+                method: 'GET',
+                headers: headers,
+            }).then(response => response.ok).then(window.location.href= rolhref+"?"+username);
+        }
     }
 </script>
 </body>

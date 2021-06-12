@@ -24,7 +24,7 @@
 <script type="text/javascript">
     function ShowFields() {
         var fieldSetForm = document.getElementById("fieldSetForm");
-        var listTitlesVet = ["Nombre de la Veterinaria: ", "Direccion: ", "Localidad:"];
+        var listTitlesVet = ["Usuario: ", "Contraseña:", "Email: ","Nombre de la Veterinaria: ", "Direccion: ", "Localidad:"];
         var listTitlesOwner = ["Usuario: ", "Contraseña:", "Email: ", "Documento de identidad: ", "Nombre Completo: ", "Direccion: ", "Localidad: "];
         var listAtributesVet = ["nameVet", "addressVet", "neigborhoodVet"];
         var listAtributesOwner = ["username", "password", "email", "person_id", "name", "address", "neighborhood"];
@@ -78,6 +78,27 @@
         } else {
             alert("Seleccione una opción para continuar");
         }
+    }
+    function createOwner() {
+        var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners';
+        var data = {
+            "username": "pio",
+            "password": "15632",
+            "email": "adssda",
+            "person_id": 130,
+            "name": "el pepe",
+            "address": "avenida tu corazon",
+            "neighborhood": "fontibon"
+        };
+
+        fetch(url, {
+            method: 'POST', // or 'PUT'
+            body: JSON.stringify(data), // data can be `string` or {object}!
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json())
+            .then(response => console.log('Success:', response));
     }
 </script>
 </body>
