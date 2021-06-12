@@ -6,10 +6,19 @@
 </head>
 <body class="loginBack">
 
+<div class="TitleInt">
+    <h1 align="center">
+        Ciudadanos de Cuatro Patas
+    </h1>
+    <h2 align="center">
+        Bienvenidos
+    </h2>
+</div>
+<!-- form for login to the program-->
 <div class="login" align="center">
     <form action="" method="get">
         <fieldset>
-            <legend>Login</legend>
+            <legend align="center">Login</legend>
             <br>
             <label for="user">Usuario:</label> <br>
             <input type="text" name="user" id="user" required>
@@ -18,12 +27,15 @@
             <input type="password" name="password" id="password" required>
             <br>
             <br>
-            <button id="logButton" type="button" onclick= "findRole()">Ingresar</button>
+            <button id="logButton" type="button" onclick="findRole()">Ingresar</button>
         </fieldset>
     </form>
     <a type="button" href="singUp.html">Registrarse</a>
 </div>
 <script type="text/javascript">
+    /**
+     * this function find the user and the password in the headers to autorize it
+     */
     function findRole() {
         let url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/userApp';
         let username = document.getElementById("user").value;
@@ -43,13 +55,17 @@
 
     }
 
+    /**
+     * This function take the role of the login, validates it and if its correct redirects to the tab corresponding to the user
+     * @param role user's role
+     */
     function redirect(role) {
-        if (role != "owner"&&role != "vet"&&role != "official"){
-        alert("Contraseña o usuario erroneos. Intente de nuevo");
-        location.reload();
+        if (role != "owner" && role != "vet" && role != "official") {
+            alert("Contraseña o usuario erroneos. Intente de nuevo");
+            location.reload();
 
-        }else{
-            var rolhref=role+".html";
+        } else {
+            var rolhref = role + ".html";
             if (role === "owner")
                 role = "owners";
             let url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/' + role;
@@ -64,7 +80,7 @@
             fetch(url, {
                 method: 'GET',
                 headers: headers,
-            }).then(response => response.ok).then(window.location.href= rolhref+"?"+username);
+            }).then(response => response.ok).then(window.location.href = rolhref + "?" + username);
         }
     }
 </script>

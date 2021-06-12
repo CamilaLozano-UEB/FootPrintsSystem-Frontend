@@ -6,15 +6,19 @@
     <link rel="stylesheet" href="CSS/Styles.css" type="text/css">
 </head>
 <body class="singupBack">
+
+<!--Selection of the role to create a new user-->
 <div class="SelectForm">
     <label for="listSingUp"> Seleccione rol: </label>
     <select name="listSingUp" id="listSingUp" onchange="ShowFields()">
         <option value="selectoption">Seleccione</option>
-        <option value="vetSelect">Veterinario</option>
+        <option value="vetSelect">Veterinaria</option>
         <option value="ownerSelect">Propietario</option>
     </select>
 </div>
 <div class="VetSingUp">
+
+    <!-- Form to create a new user-->
     <form id="formSingUp" method="get">
         <fieldset id="fieldSetForm">
         </fieldset>
@@ -23,6 +27,12 @@
 </div>
 
 <script type="text/javascript">
+
+    /**
+     *It takes the parameter of the selected role and from this it shows
+     * the form for the creation of a user from the role
+     * @constructor
+     */
     function ShowFields() {
         var fieldSetForm = document.getElementById("fieldSetForm");
         var listTitlesVet = ["Usuario: ", "Contraseña:", "Email: ", "Nombre de la Veterinaria: ", "Direccion: ", "Localidad:"];
@@ -35,6 +45,7 @@
             fieldSetForm.removeChild(fieldSetForm.firstChild);
         var div = document.createElement("div");
 
+        //Shows the form for a vet
         if (role === "vetSelect") {
             for (var i = 0; i < listTitlesVet.length; i++) {
                 var label = document.createElement("label");
@@ -52,6 +63,7 @@
             inputButton.textContent = "Registrar";
             inputButton.addEventListener("click", function createVet() {
 
+                //Create the vet's user
                 var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/vet';
                 var data = {
                     "username": document.getElementById("usernameVet").value,
@@ -68,13 +80,13 @@
                     headers: {
                         'Content-Type': 'application/json'
                     }
-                }).then(res => res.text()).then(res =>validateResponseVet(res));
+                }).then(res => res.text()).then(res => validateResponseVet(res));
             })
             div.appendChild(inputButton);
 
             fieldSetForm.appendChild(div);
 
-
+            //Shows the form for the creation of a owner's user
         } else if (role === "ownerSelect") {
             for (var i = 0; i < listTitlesOwner.length; i++) {
                 var label = document.createElement("label");
@@ -91,7 +103,7 @@
             inputButton.disabled = false;
             inputButton.textContent = "Registrar";
             inputButton.addEventListener("click", function createOwner() {
-
+                //Takes and send the data to create a new owner user
                 var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners';
                 var data = {
                     "username": document.getElementById("username").value,
@@ -109,7 +121,7 @@
                     headers: {
                         'Content-Type': 'application/json'
                     }
-                }).then(res => res.text()).then(res =>validateResponseOwner(res));
+                }).then(res => res.text()).then(res => validateResponseOwner(res));
             })
             div.appendChild(inputButton);
 
@@ -120,20 +132,29 @@
         }
     }
 
+    /**
+     * Function that validates the correct fields to the creation of the owner's user
+     * @param res String message
+     */
     function validateResponseOwner(res) {
         if ("se ha registrado correctamente" === res) {
-        alert("Se creo el propietario correctamente");
-        window.location.href = "login.html";
-        }else{
+            alert("Se creo el propietario correctamente");
+            window.location.href = "login.html";
+        } else {
             alert("Ocurre un problema al crear el propietario, revise los datos ");
             location.reload();
         }
     }
+
+    /**
+     * Function that validates the correct fields to the creation of the vet's user
+     * @param res String message
+     */
     function validateResponseVet(res) {
         if ("se ha registrado correctamente la veterinaria" === res) {
             alert("Se creo la veterinaria correctamente");
             window.location.href = "login.html";
-        }else{
+        } else {
             alert("Ocurre un problema al crear la veterinaria, revise los datos ");
             location.reload();
         }

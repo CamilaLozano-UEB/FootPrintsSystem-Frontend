@@ -1,26 +1,45 @@
+/*
+Body color of background
+ */
 body {
     background-color: #dcdde1;
 }
-select{
+
+/*
+Font to the letter
+ */
+select {
     font-family: Verdana;
     border-radius: 30px;
 }
-input{
+
+/*
+Border radius for the input fields
+ */
+input {
     border-radius: 30px;
 }
-button{
+
+/*
+Styles for the buttons
+ */
+button {
     font-family: Verdana;
     border-radius: 50px;
     width: 40%;
     height: 9%;
 }
+
+/*
+Styles for the div login
+ */
 .login {
     font-family: Verdana;
     position: absolute;
-    top: 15%;
+    top: 20%;
     left: 35%;
     width: 25%;
-    height: 35%;
+    height: 40%;
     background: #353b48;
     border-radius: 15px;
     border: solid #353b48;
@@ -28,10 +47,16 @@ button{
     color: white;
 }
 
+/*
+Styles for the forms
+ */
 fieldset {
     border-color: transparent;
 }
 
+/*
+Styles for login button
+ */
 #logButton {
     font-family: Verdana;
     background-color: #dcdde1;
@@ -39,6 +64,9 @@ fieldset {
     border-radius: 18px;
 }
 
+/*
+Styles for register button
+ */
 a {
     font-family: Verdana;
     background-color: #dcdde1;
@@ -46,29 +74,47 @@ a {
     border-radius: 22px;
 }
 
-.ownerBack{
+/*
+Styles for the owner interface
+ */
+.ownerBack {
 
-    background-image: url("../imgs/1pets.png") ;
+    background-image: url("../imgs/1pets.png");
     background-size: cover;
     background-position: revert;
 }
-.loginBack{
 
-     background-image: url("../imgs/2pets.jpeg") ;
-     background-size: cover;
-     background-position: center;
- }
-.singupBack{
+/*
+Styles for the login interface
+ */
+.loginBack {
 
-    background-image: url("../imgs/3pets.jpg") ;
+    background-image: url("../imgs/2pets.jpeg");
+    background-size: cover;
+    background-position: center;
+}
+
+/*
+Styles for the SingUp interface
+ */
+.singupBack {
+
+    background-image: url("../imgs/3pets.jpg");
     background-size: cover;
 }
-.vetBack{
 
-    background-image: url("../imgs/4pets.png") ;
+/*
+Styles for the Vet interface
+ */
+.vetBack {
+    background-image: url("../imgs/4pets.png");
     background-size: cover;
 }
-.configureStyleMainForms{
+
+/*
+Position and background for the forms
+ */
+.configureStyleMainForms {
     position: absolute;
     left: 1%;
     width: 600px;
@@ -76,11 +122,19 @@ a {
     padding: 30px;
     border-radius: 20px;
 }
-.configureStyleMainBox{
+
+/*
+Background for the forms
+ */
+.configureStyleMainBox {
     background: #FFFFFF44;
     border-radius: 20px;
 }
-.SelectForm{
+
+/*
+Styles for the select form to create a user interface
+ */
+.SelectForm {
     font-family: Verdana;
     color: white;
     width: 600px;
@@ -88,7 +142,11 @@ a {
     padding: 30px;
     border-radius: 20px;
 }
-.VetSingUp{
+
+/*
+Styles for the vet sing up interface
+ */
+.VetSingUp {
     font-family: Verdana;
     color: white;
     width: 600px;
@@ -96,4 +154,10 @@ a {
     padding: 30px;
     border-radius: 20px;
 
+}
+
+.TitleInt {
+    font-family: Verdana;
+    position: absolute;
+    left: 29.5%;
 }

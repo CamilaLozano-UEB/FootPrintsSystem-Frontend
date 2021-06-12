@@ -29,7 +29,7 @@
     <script src="Javascript/Navigation.js"></script>
     <link rel="stylesheet" href="css/styles.css" type="text/css">
 </head>
-
+<!-- Navigation of the owner interface -->
 <nav>
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
@@ -62,12 +62,12 @@
 
 <body class="ownerBack">
 
-
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="register" role="tabpanel" aria-labelledby="register-tab" align="center">
 
         <div class="configureStyleMainForms">
 
+            <!--Form for creation of owner's pet-->
             <form action="Createpatsform" autocomplete="off" id="formC" name="formC">
                 <fieldset>
                     <legend> Formulario de Registro de mascotas</legend>
@@ -126,6 +126,8 @@
     </div>
     <div class="tab-pane fade" id="update" role="tabpanel" aria-labelledby="update-tab" align="center">
         <div class="configureStyleMainForms">
+
+            <!--Form for the update of owner's pet -->
             <form action="Uppetsform" autocomplete="off" name="formU" id="formU">
                 <fieldset>
                     <legend> Formulario de Actualizar de mascotas</legend>
@@ -190,6 +192,7 @@
     </div>
     <div class="tab-pane fade" id="petCase" role="tabpanel" aria-labelledby="petCase-tab" align="center">
         <div class="configureStyleMainForms">
+            <!--Form for the creation of a case -->
             <form name="formCase" autocomplete="off" id="formCase">
                 <fieldset>
                     <legend> Crear Caso</legend>
@@ -225,6 +228,8 @@
     </div>
     <div class="tab-pane fade" id="find" role="tabpanel" aria-labelledby="find-tab" align="center">
         <div class="configureStyleMainBox">
+
+            <!-- Table to shows all the vets for an specific owner -->
             <h2 class="titles">Tabla de Mascotas del Propietario</h2>
             <table id="myTableOwner" class="table table-fluid">
                 <thead>
@@ -249,8 +254,10 @@
     </div>
     <div class="tab-pane fade" id="CaseAndVisits" role="tabpanel" aria-labelledby="CaseAndVisits-tab" align="center">
         <div class="configureStyleMainBox">
+            <!-- Table to list all cases and visits of an owner's pets-->
             <h3 class="titles">Busqueda de casos y visitas por fechas</h3>
             <h5>Filtrar</h5>
+            <!-- Name and date filters for the cases and visits table-->
             <form name="formTCV" id="formTCV">
                 <label for="Date1"> Primer rango de fecha</label><br>
                 <input type="Date" name="Date1" size="30" id="Date1" required>
@@ -284,6 +291,7 @@
 
     <div class="tab-pane fade" id="Upuser" role="tabpanel" aria-labelledby="Upuser-tab" align="center">
         <div class="configureStyleMainForms">
+            <!--Form to update the owner's data-->
             <form name="formUser" autocomplete="off" id="formUser">
                 <fieldset>
                     <legend> Formulario de Actualizar Datos del Propietario</legend>
@@ -334,13 +342,19 @@
         var Casebutton = document.getElementById("caseB");
         var Userbutton = document.getElementById("Uuser");
 
+        /**
+         * Find the username in the url
+         * @returns {string}
+         */
         function findUsername() {
             var url = window.location.href
             var part = url.split("?");
             return (part[1])
         }
 
-
+        /**
+         * Get the parameters of the form and send it to the rest in backend for create a pet
+         */
         Cbutton.onclick = function () {
             var username = findUsername();
             var microchip
@@ -369,6 +383,10 @@
                 .then(res => validateNewPet(res));
         }
 
+        /**
+         * Validate the register of a pet
+         * @param res string message
+         */
         function validateNewPet(res) {
             if (res === "se ha registrado correctamente") {
                 alert("Se creo la mascota correctamente");
@@ -378,6 +396,9 @@
             location.reload();
         }
 
+        /**
+         * Get the parameters of the form and send it to the rest in backend for update a pet
+         */
         Ubutton.onclick = function () {
             var username = findUsername();
             var pet_id = document.getElementById("petid").value;
@@ -416,6 +437,10 @@
             location.reload();
         }
 
+        /**
+         * Get the parameters of the form and send it to the rest in backend for create a case
+         */
+
         Casebutton.onclick = function () {
             var username = findUsername();
             var pet_id = document.getElementById("petidC").value;
@@ -427,6 +452,8 @@
                 "type": document.formCase.typeCase[document.formCase.typeCase.selectedIndex].text,
                 "description": document.getElementById("description").value
             };
+
+            //Send and create a post method in the rest backend
             fetch(url, {
                 method: 'POST',
                 body: JSON.stringify(data), // data can be `string` or {object}!
@@ -446,6 +473,9 @@
             location.reload();
         }
 
+        /**
+         * Get the parameter of the form and send it to rest in the backend to update the owner's data
+         */
         Userbutton.onclick = function () {
             var username = findUsername();
             var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/' + username;
@@ -461,6 +491,7 @@
                 "neighborhood": document.formUser.neighborhoodUser[document.formUser.neighborhoodUser.selectedIndex].text
             };
 
+            //Send and create a put method in the rest backend
             fetch(url, {
                 method: 'PUT',
                 body: JSON.stringify(data), // data can be `string` or {object}!

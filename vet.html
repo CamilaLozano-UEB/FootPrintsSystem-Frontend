@@ -29,6 +29,8 @@
     <link rel="stylesheet" href="css/styles.css" type="text/css">
 </head>
 <body class="vetBack">
+
+<!--Navigation of the vet interface-->
 <nav>
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
@@ -37,7 +39,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" id="find-tab" data-toggle="tab" href="#find" role="tab" aria-controls="find"
-               aria-selected="false">Tabla de Mascotas</a>
+               aria-selected="false">Tabla de Visitas</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="Upuser-tab" data-toggle="tab" href="#Upuser" role="tab" aria-controls="Upuser"
@@ -49,6 +51,8 @@
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="register" role="tabpanel" aria-labelledby="register-tab" align="center">
         <div class="configureStyleMainForms">
+
+            <!--Form to create a new visit in the vet-->
             <form action="CreatVisitsform" autocomplete="off" id="formVC" name="formVC">
                 <fieldset>
                     <legend> Formulario de Registro de Visitas</legend>
@@ -57,7 +61,7 @@
                     <br>
                     <br>
                     <label for="type">Motivo de la visita: </label><br>
-                    <select name="type" id="type"  onchange="controlMicrochip()" required>
+                    <select name="type" id="type" onchange="controlMicrochip()" required>
                         <option value="" selected="selected">Seleccione</option>
                         <option value="2">Esterilización</option>
                         <option value="3">Implantación de microchip</option>
@@ -93,6 +97,8 @@
         <div class="configureStyleMainBox">
             <h3 class="titles">Busqueda de visitas por fechas y nombre de la mascota</h3>
             <h5>Filtrar</h5>
+
+            <!-- Filters of Date and pet name to search the visits of this pet-->
             <form name="formTCV" id="formTCV">
                 <label for="Date1"> Primer rango de fecha</label><br>
                 <input type="Date" name="Date1" size="30" id="Date1" required>
@@ -111,6 +117,8 @@
 
             <div class="TableVisit" id="TableVisit">
                 <h2 class="titles">Tabla de Visitas de Mascotas</h2>
+
+                <!--Table that shows the visits of a pet in the vet-->
                 <table id="myTablePets" class="table table-fluid">
                     <thead>
                     <tr>
@@ -129,6 +137,8 @@
     </div>
     <div class="tab-pane fade" id="Upuser" role="tabpanel" aria-labelledby="Upuser-tab" align="center">
         <div class="configureStyleMainForms">
+
+            <!--Form to update the vet's user data-->
             <form name="formUser" autocomplete="off" id="formUser">
                 <fieldset>
                     <legend> Formulario de Actualizar datos de la Veterinaria</legend>
@@ -178,40 +188,53 @@
     var visitButton = document.getElementById("Cpets");
     var vetButton = document.getElementById("Uuser");
 
+    /**
+     * Function that validates the implantation of a microchip in a pet
+     */
     function controlMicrochip() {
-        var type=document.formVC.type[document.formVC.type.selectedIndex].text;
-        if(type=="Implantación de microchip"){
-            var microchip= document.getElementById("microchip");
-            microchip.disabled=false;
-        }else{
-            var microchip= document.getElementById("microchip");
-            microchip.disabled=true;
+        var type = document.formVC.type[document.formVC.type.selectedIndex].text;
+        if (type == "Implantación de microchip") {
+            var microchip = document.getElementById("microchip");
+            microchip.disabled = false;
+        } else {
+            var microchip = document.getElementById("microchip");
+            microchip.disabled = true;
         }
     }
 
+    /**
+     * Find the user in the url
+     * @returns {string}
+     */
     function findUsername() {
         var url = window.location.href
         var part = url.split("?");
         return (part[1])
     }
 
+    /**
+     * Take and send it the data to the backend and create the visit
+     */
     visitButton.onclick = function () {
         var username = findUsername();
-        var pet_id=document.getElementById("petId").value;
-        var create_at=document.getElementById("CreatAt").value;
-        var type=document.formVC.type[document.formVC.type.selectedIndex].text
+        var pet_id = document.getElementById("petId").value;
+        var create_at = document.getElementById("CreatAt").value;
+        var type = document.formVC.type[document.formVC.type.selectedIndex].text
         var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/vet/' + username + '/visits';
-        if(type=="Implantación de microchip") {
+
+        //If the visit is for implantation microchip, take the microchip value and send it
+        if (type == "Implantación de microchip") {
             var microchip = document.getElementById("microchip").value;
             type = "implantación de microchip";
             var data = {
                 "created_at": create_at.replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1'),
                 "type": type,
-                "microchip":microchip,
+                "microchip": microchip,
                 "description": document.getElementById("description").value,
                 "pet_id": pet_id
             };
-            console.log(data)
+
+            //Send and create a post method in the rest backend
             fetch(url, {
                 method: 'POST',
                 body: JSON.stringify(data), // data can be `string` or {object}!
@@ -220,30 +243,40 @@
                 }
             }).then(res => res.text())
                 .then(response => showAlert(response));
-        }else{
+        } else {
             var data = {
-                "created_at":create_at.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3/$2/$1'),
-                "type":type,
+                "created_at": create_at.replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1'),
+                "type": type,
                 "description": document.getElementById("description").value,
-                "pet_id":pet_id
-            };fetch(url, {
+                "pet_id": pet_id
+            };
+            fetch(url, {
                 method: 'POST',
                 body: JSON.stringify(data), // data can be `string` or {object}!
                 headers: {
                     'Content-Type': 'application/json'
                 }
             }).then(res => res.text())
-                .then(response => showAlert( response));
+                .then(response => showAlert(response));
         }
     }
-    function showAlert(res){
-        if(res==="Se ha creado exitosamente la visita!"){
+
+    /**
+     * Function that sends a message if the visit creation is successful
+     * @param res
+     */
+    function showAlert(res) {
+        if (res === "Se ha creado exitosamente la visita!") {
             alert("Se ha creado exitosamente la visita!");
-        }else{
+        } else {
             alert(res.toString());
         }
         location.reload();
     }
+
+    /**
+     * Update the dat of the vet
+     */
     vetButton.onclick = function () {
         var username = findUsername();
         var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/vet/' + username;
@@ -258,6 +291,7 @@
             "neighborhood": document.formUser.neighborhoodUser[document.formUser.neighborhoodUser.selectedIndex].text
         };
 
+        //Send and create a put method in the rest backend
         fetch(url, {
             method: 'PUT',
             body: JSON.stringify(data), // data can be `string` or {object}!
