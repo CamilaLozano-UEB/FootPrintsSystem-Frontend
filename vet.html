@@ -8,8 +8,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <script src="Javascript/PAG.js"></script>
-    <link rel="stylesheet" href="css/styles.css" type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -28,6 +26,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="Javascript/Navigation.js"></script>
+    <link rel="stylesheet" href="css/styles.css" type="text/css">
 </head>
 <body class="vetBack">
 <nav>
@@ -57,20 +56,25 @@
                     <input type="date" name="CreatAt" id="CreatAt" required>
                     <br>
                     <br>
-                    <label for="name">Motivo de la visita: </label><br>
-                    <select name="species" id="species" required>
+                    <label for="type">Motivo de la visita: </label><br>
+                    <select name="type" id="type"  onchange="controlMicrochip()" required>
                         <option value="" selected="selected">Seleccione</option>
                         <option value="2">Esterilización</option>
                         <option value="3">Implantación de microchip</option>
-                        <option value="3">Vacunación</option>
-                        <option value="3">Desparasitación</option>
-                        <option value="3">Urgencia</option>
-                        <option value="3">Control</option>
+                        <option value="4">Vacunación</option>
+                        <option value="5">Desparasitación</option>
+                        <option value="6">Urgencia</option>
+                        <option value="7">Control</option>
                     </select>
                     <br>
                     <br>
-                    <label for="species">Descripción de la visita</label><br>
-                    <input type="text" name="name" size="30" id="name"
+                    <label for="microchip">Microchip de Mascota</label><br>
+                    <input type="text" name="microchip" size="30" id="microchip" placeholder="Ej: 123456789" disabled>
+
+                    <br>
+                    <br>
+                    <label for="description">Descripción de la visita</label><br>
+                    <input type="text" name="description" size="30" id="description"
                            placeholder="Ej: Cita de control de esterilización">
                     <br>
                     <br>
@@ -79,7 +83,7 @@
                     <br>
                     <br>
                     <p align="center">
-                        <button type="button" id="Cpets">Crear mascota</button>
+                        <button type="button" id="Cpets">Crear Caso</button>
                     </p>
                 </fieldset>
             </form>
@@ -170,6 +174,103 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    var visitButton = document.getElementById("Cpets");
+    var vetButton = document.getElementById("Uuser");
+
+    function controlMicrochip() {
+        var type=document.formVC.type[document.formVC.type.selectedIndex].text;
+        if(type=="Implantación de microchip"){
+            var microchip= document.getElementById("microchip");
+            microchip.disabled=false;
+        }else{
+            var microchip= document.getElementById("microchip");
+            microchip.disabled=true;
+        }
+    }
+
+    function findUsername() {
+        var url = window.location.href
+        var part = url.split("?");
+        return (part[1])
+    }
+
+    visitButton.onclick = function () {
+        var username = findUsername();
+        var pet_id=document.getElementById("petId").value;
+        var create_at=document.getElementById("CreatAt").value;
+        var type=document.formVC.type[document.formVC.type.selectedIndex].text
+        var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/vet/' + username + '/visits';
+        if(type=="Implantación de microchip") {
+            var microchip = document.getElementById("microchip").value;
+            type = "implantación de microchip";
+            var data = {
+                "created_at": create_at.replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1'),
+                "type": type,
+                "microchip":microchip,
+                "description": document.getElementById("description").value,
+                "pet_id": pet_id
+            };
+            console.log(data)
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(data), // data can be `string` or {object}!
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.text())
+                .then(response => showAlert(response));
+        }else{
+            var data = {
+                "created_at":create_at.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3/$2/$1'),
+                "type":type,
+                "description": document.getElementById("description").value,
+                "pet_id":pet_id
+            };fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(data), // data can be `string` or {object}!
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.text())
+                .then(response => showAlert( response));
+        }
+    }
+    function showAlert(res){
+        if(res==="Se ha creado exitosamente la visita!"){
+            alert("Se ha creado exitosamente la visita!");
+        }else{
+            alert(res.toString());
+        }
+        location.reload();
+    }
+    vetButton.onclick = function () {
+        var username = findUsername();
+        var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/vet/' + username;
+
+
+        var data = {
+            "username": username,
+            "password": null,
+            "email": null,
+            "name": null,
+            "address": document.getElementById("addressUser").value,
+            "neighborhood": document.formUser.neighborhoodUser[document.formUser.neighborhoodUser.selectedIndex].text
+        };
+
+        fetch(url, {
+            method: 'PUT',
+            body: JSON.stringify(data), // data can be `string` or {object}!
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.text())
+            .then(response => console.log('Success:', response));
+        alert("Se actualizaron los datos ");
+        location.reload();
+    }
+
+</script>
 
 </body>
 </html>
