@@ -134,7 +134,7 @@
                     <br>
                     <br>
                     <label for="nameU">Ingrese su nombre de la mascota:</label><br>
-                    <input type="text" name="nameU" size="30" id="nameU" placeholder="Ej: Sammy"required>
+                    <input type="text" name="nameU" size="30" id="nameU" placeholder="Ej: Sammy" required>
                     <br>
                     <br>
                     <label for="microchipU">Ingrese su microchip:</label><br>
@@ -171,7 +171,7 @@
                     <br>
                     <br>
                     <label for="raceU">Seleccione la raza:</label><br>
-                    <input type="text" name="raceU" size="30" id="raceU" placeholder="Ej: Pastor Aleman"required>
+                    <input type="text" name="raceU" size="30" id="raceU" placeholder="Ej: Pastor Aleman" required>
                     <br>
                     <br>
                     <label for="imagePetU"> Imagen de la mascota
@@ -222,7 +222,7 @@
                 </fieldset>
             </form>
         </div>
-        </div>
+    </div>
     <div class="tab-pane fade" id="find" role="tabpanel" aria-labelledby="find-tab" align="center">
         <div class="configureStyleMainBox">
             <h2 class="titles">Tabla de Mascotas del Propietario</h2>
@@ -264,29 +264,17 @@
             </form>
 
             <br>
-            <div style="float: left; width: 50%;">
-                <table id="tableCases" class="table table-fluid">
+            <div id="OwnerTableVisitsCase" align="center">
+                <table id="myTableCaseVisitOwner" class="table table-fluid">
                     <thead>
                     <tr>
-                        <th scope="col">ID de la visita</th>
-                        <th scope="col">Id de la mascota</th>
-                        <th scope="col">fecha</th>
-                        <th scope="col">tipo</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Caso o Visita</th>
+                        <th scope="col">ID del Caso o Visita</th>
+                        <th scope="col">Nombre de la Mascota</th>
+                        <th scope="col">Tipo</th>
                         <th scope="col">descripción</th>
-                        <th scope="col">microchip</th>
-                    </tr>
-                    </thead>
-                </table>
-            </div>
-            <div style="float: left; width: 50%;">
-                <table id="tableVisit" class="table table-fluid">
-                    <thead>
-                    <tr>
-                        <th scope="col">ID de la Case</th>
-                        <th scope="col">Id de la mascota</th>
-                        <th scope="col">fecha</th>
-                        <th scope="col">tipo</th>
-                        <th scope="col">descripción</th>
+                        <th scope="col">Nombre de la Veterinaria</th>
                     </tr>
                     </thead>
                 </table>
@@ -357,18 +345,18 @@
             var username = findUsername();
             var microchip
             var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' + username + '/pets';
-            if( document.getElementById("microchip").value==="") {
-                microchip=null;
-            }else{
-                microchip=Number(document.getElementById("microchip").value)
+            if (document.getElementById("microchip").value === "") {
+                microchip = null;
+            } else {
+                microchip = Number(document.getElementById("microchip").value)
             }
             var data = {
-                "microchip":microchip,
+                "microchip": microchip,
                 "name": document.getElementById("name").value,
                 "species": document.formC.species[document.formC.species.selectedIndex].text,
                 "race": document.getElementById("race").value,
-                "size":  document.formC.size[document.formC.size.selectedIndex].text,
-                "sex":  document.formC.sex[document.formC.sex.selectedIndex].text
+                "size": document.formC.size[document.formC.size.selectedIndex].text,
+                "sex": document.formC.sex[document.formC.sex.selectedIndex].text
                 //,"picture":document.getElementById("imagePet").value
             };
             fetch(url, {
@@ -380,30 +368,33 @@
             }).then(res => res.text())
                 .then(res => validateNewPet(res));
         }
-        function validateNewPet(res){
-            if(res==="se ha registrado correctamente"){
+
+        function validateNewPet(res) {
+            if (res === "se ha registrado correctamente") {
                 alert("Se creo la mascota correctamente");
-            }else{
+            } else {
                 alert(res.toString());
-            }location.reload();
+            }
+            location.reload();
         }
+
         Ubutton.onclick = function () {
             var username = findUsername();
-            var pet_id=document.getElementById("petid").value;
+            var pet_id = document.getElementById("petid").value;
             var microchip
-            var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' + username + '/pets/'+pet_id;
-            if( document.getElementById("microchipU").value==="") {
-                microchip=null;
-            }else{
-                microchip=Number(document.getElementById("microchip").value)
+            var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' + username + '/pets/' + pet_id;
+            if (document.getElementById("microchipU").value === "") {
+                microchip = null;
+            } else {
+                microchip = Number(document.getElementById("microchip").value)
             }
             var data = {
-                "microchip":microchip,
+                "microchip": microchip,
                 "name": document.getElementById("nameU").value,
                 "species": document.formU.speciesU[document.formU.speciesU.selectedIndex].text,
                 "race": document.getElementById("raceU").value,
-                "size":  document.formU.sizeU[document.formU.sizeU.selectedIndex].text,
-                "sex":  document.formU.sexU[document.formU.sexU.selectedIndex].text
+                "size": document.formU.sizeU[document.formU.sizeU.selectedIndex].text,
+                "sex": document.formU.sexU[document.formU.sexU.selectedIndex].text
                 //,"picture":document.getElementById("imagePet").value
             };
             fetch(url, {
@@ -415,21 +406,24 @@
             }).then(res => res.text())
                 .then(res => validateUpPet(res));
         }
-        function validateUpPet(res){
-            if(res==="Se ha modificado exitosamente!"){
+
+        function validateUpPet(res) {
+            if (res === "Se ha modificado exitosamente!") {
                 alert("Se ha modificado la mascota exitosamente!");
-            }else{
+            } else {
                 alert(res.toString());
-            }location.reload();
+            }
+            location.reload();
         }
+
         Casebutton.onclick = function () {
             var username = findUsername();
-            var pet_id=document.getElementById("petidC").value;
-            var create_at=document.getElementById("caseDate").value;
-            var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/' + username + '/pet/'+pet_id+'/petCases';
+            var pet_id = document.getElementById("petidC").value;
+            var create_at = document.getElementById("caseDate").value;
+            var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/' + username + '/pet/' + pet_id + '/petCases';
 
             var data = {
-                "created_at":create_at.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3/$2/$1'),
+                "created_at": create_at.replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1'),
                 "type": document.formCase.typeCase[document.formCase.typeCase.selectedIndex].text,
                 "description": document.getElementById("description").value
             };
@@ -442,13 +436,16 @@
             }).then(res => res.text())
                 .then(res => validateMessage(res));
         }
-        function validateMessage(res){
-            if(res==="se ha registrado correctamente"){
+
+        function validateMessage(res) {
+            if (res === "se ha registrado correctamente") {
                 alert("Se creo el caso correctamente");
-            }else{
+            } else {
                 alert(res.toString());
-            }location.reload();
+            }
+            location.reload();
         }
+
         Userbutton.onclick = function () {
             var username = findUsername();
             var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/' + username;
