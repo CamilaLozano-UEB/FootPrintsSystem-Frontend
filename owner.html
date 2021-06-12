@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="css/styles.css" type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -28,6 +27,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="Javascript/Navigation.js"></script>
+    <link rel="stylesheet" href="css/styles.css" type="text/css">
 </head>
 
 <nav>
@@ -39,6 +39,10 @@
         <li class="nav-item">
             <a class="nav-link" id="update-tab" data-toggle="tab" href="#update" role="tab" aria-controls="update"
                aria-selected="false">Actualizar Mascota</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="petCase-tab" data-toggle="tab" href="#petCase" role="tab" aria-controls="petCase"
+               aria-selected="false">Crear Caso</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="find-tab" data-toggle="tab" href="#find" role="tab" aria-controls="find"
@@ -72,10 +76,10 @@
                     <br>
                     <br>
                     <label for="name">Ingrese su nombre de la mascota:</label><br>
-                    <input type="text" name="name" size="30" id="name" placeholder="Ej: 123456789">
+                    <input type="text" name="name" size="30" id="name" placeholder="Ej: Sammy" required>
                     <br>
                     <br>
-                    <label for="species">"Seleccione la especie:"</label><br>
+                    <label for="species">Seleccione la especie:</label><br>
                     <select name="species" id="species" required>
                         <option value="" selected="selected">Seleccione</option>
                         <option value="2">Canino</option>
@@ -104,42 +108,10 @@
                     <br>
                     <br>
                     <label for="race">Seleccione la raza:</label><br>
-                    <input type="text" name="race" size="30" id="race" placeholder="Ej: Pastor Aleman">
+                    <input type="text" name="race" size="30" id="race" placeholder="Ej: Pastor Aleman" required>
                     <br>
                     <br>
-                    <label for="neighborhood">Seleccione la localidad:</label><br>
-                    <select id="neighborhood" name="neighborhood" required>
-                        <option value="" selected="selected">Seleccione</option>
-                        <option value="2">Usaquen</option>
-                        <option value="3">Chapinero</option>
-                        <option value="4">Santa Fe</option>
-                        <option value="5">San Cristobal</option>
-                        <option value="6">Usme</option>
-                        <option value="7">Tunjuelito</option>
-                        <option value="8">Bosa</option>
-                        <option value="9">Kennedy</option>
-                        <option value="10">Fontibon</option>
-                        <option value="11">Engativa</option>
-                        <option value="12">Suba</option>
-                        <option value="13">Barrios Unidos</option>
-                        <option value="14">Teusaquillo</option>
-                        <option value="15">Los Martires</option>
-                        <option value="16">Antonio Nariño</option>
-                        <option value="17">Puente Aranda</option>
-                        <option value="18">La Candelaria</option>
-                        <option value="19">Uribe</option>
-                        <option value="20">Ciudad Bolivar</option>
-                        <option value="21">Sumapaz</option>
-                        <option value="22">Municipios aledaños</option>
-                    </select>
-                    <br>
-                    <br>
-                    <label for="address">Digite la dirección:</label><br>
-                    <input type="text" name="address" size="30" id="address" placeholder="Ej: Cr 7 # 100 - 10"
-                           required>
-                    <br>
-                    <br>
-                    <label for="imagePet"> Imagen de la mascota - Arrastre la imagen
+                    <label for="imagePet"> Imagen de la mascota
                     </label><br>
                     <input type="file" name="imagePet" size="30" id="imagePet" required>
                     <br>
@@ -158,11 +130,11 @@
                 <fieldset>
                     <legend> Formulario de Actualizar de mascotas</legend>
                     <label for="petid">ID de la mascota:</label><br>
-                    <input id="petid" type="text" name="petid" disabled>
+                    <input id="petid" type="text" name="petid" disabled required>
                     <br>
                     <br>
                     <label for="nameU">Ingrese su nombre de la mascota:</label><br>
-                    <input type="text" name="nameU" size="30" id="nameU" placeholder="Ej: 123456789">
+                    <input type="text" name="nameU" size="30" id="nameU" placeholder="Ej: Sammy"required>
                     <br>
                     <br>
                     <label for="microchipU">Ingrese su microchip:</label><br>
@@ -199,42 +171,10 @@
                     <br>
                     <br>
                     <label for="raceU">Seleccione la raza:</label><br>
-                    <input type="text" name="raceU" size="30" id="raceU" placeholder="Ej: Pastor Aleman">
+                    <input type="text" name="raceU" size="30" id="raceU" placeholder="Ej: Pastor Aleman"required>
                     <br>
                     <br>
-                    <label for="neighborhoodU">Seleccione la localidad:</label><br>
-                    <select id="neighborhoodU" name="neighborhoodU" required>
-                        <option value="" selected="selected">Seleccione</option>
-                        <option value="2">Usaquen</option>
-                        <option value="3">Chapinero</option>
-                        <option value="4">Santa Fe</option>
-                        <option value="5">San Cristobal</option>
-                        <option value="6">Usme</option>
-                        <option value="7">Tunjuelito</option>
-                        <option value="8">Bosa</option>
-                        <option value="9">Kennedy</option>
-                        <option value="10">Fontibon</option>
-                        <option value="11">Engativa</option>
-                        <option value="12">Suba</option>
-                        <option value="13">Barrios Unidos</option>
-                        <option value="14">Teusaquillo</option>
-                        <option value="15">Los Martires</option>
-                        <option value="16">Antonio Nariño</option>
-                        <option value="17">Puente Aranda</option>
-                        <option value="18">La Candelaria</option>
-                        <option value="19">Uribe</option>
-                        <option value="20">Ciudad Bolivar</option>
-                        <option value="21">Sumapaz</option>
-                        <option value="22">Municipios aledaños</option>
-                    </select>
-                    <br>
-                    <br>
-                    <label for="addressU">Digite la dirección:</label><br>
-                    <input type="text" name="addressU" size="30" id="addressU" placeholder="Ej: Cr 7 # 100 - 10"
-                           required>
-                    <br>
-                    <br>
-                    <label for="imagePetU"> Imagen de la mascota - Arrastre la imagen
+                    <label for="imagePetU"> Imagen de la mascota
                     </label><br>
                     <input type="file" name="imagePetU" size="30" id="imagePetU" required>
                     <br>
@@ -248,7 +188,41 @@
         </div>
 
     </div>
+    <div class="tab-pane fade" id="petCase" role="tabpanel" aria-labelledby="petCase-tab" align="center">
+        <div class="configureStyleMainForms">
+            <form name="formCase" autocomplete="off" id="formCase">
+                <fieldset>
+                    <legend> Crear Caso</legend>
+                    <label for="petidC">ID de la mascota:</label><br>
+                    <input id="petidC" type="text" name="petidC" disabled required>
+                    <br>
+                    <br>
+                    <label for="caseDate"> Fecha del caso</label><br>
+                    <input type="Date" name="caseDate" size="30" id="caseDate" required>
+                    <br>
+                    <br>
+                    <label for="typeCase">Tipo de caso:</label><br>
+                    <select id="typeCase" name="typeCase" required>
+                        <option value="" selected="selected">Seleccione</option>
+                        <option value="2">Perdida</option>
+                        <option value="3">Robo</option>
+                        <option value="4">Fallecimiento</option>
+                    </select>
+                    <br>
+                    <br>
+                    <label for="description">Descripción:</label><br>
+                    <input type="text" name="description" size="30" id="description" placeholder="Ej: La mascota estaba"
+                           required>
+                    <br>
+                    <br>
 
+                    <p align="center">
+                        <button type="button" id="caseB">Actualizar datos</button>
+                    </p>
+                </fieldset>
+            </form>
+        </div>
+        </div>
     <div class="tab-pane fade" id="find" role="tabpanel" aria-labelledby="find-tab" align="center">
         <div class="configureStyleMainBox">
             <h2 class="titles">Tabla de Mascotas del Propietario</h2>
@@ -319,6 +293,7 @@
             </div>
         </div>
     </div>
+
     <div class="tab-pane fade" id="Upuser" role="tabpanel" aria-labelledby="Upuser-tab" align="center">
         <div class="configureStyleMainForms">
             <form name="formUser" autocomplete="off" id="formUser">
@@ -367,6 +342,8 @@
     </div>
     <script type="text/javascript">
         var Cbutton = document.getElementById("Cpets");
+        var Ubutton = document.getElementById("Upets");
+        var Casebutton = document.getElementById("caseB");
         var Userbutton = document.getElementById("Uuser");
 
         function findUsername() {
@@ -375,29 +352,108 @@
             return (part[1])
         }
 
-        //aun no esta listo
+
         Cbutton.onclick = function () {
             var username = findUsername();
+            var microchip
             var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' + username + '/pets';
+            if( document.getElementById("microchip").value==="") {
+                microchip=null;
+            }else{
+                microchip=Number(document.getElementById("microchip").value)
+            }
             var data = {
-                "username": username,
-
+                "microchip":microchip,
+                "name": document.getElementById("name").value,
+                "species": document.formC.species[document.formC.species.selectedIndex].text,
+                "race": document.getElementById("race").value,
+                "size":  document.formC.size[document.formC.size.selectedIndex].text,
+                "sex":  document.formC.sex[document.formC.sex.selectedIndex].text
+                //,"picture":document.getElementById("imagePet").value
             };
-
             fetch(url, {
-                method: 'POST', // or 'PUT'
+                method: 'POST',
                 body: JSON.stringify(data), // data can be `string` or {object}!
                 headers: {
                     'Content-Type': 'application/json'
                 }
             }).then(res => res.text())
-                .then(response => console.log('Success:', response));
+                .then(res => validateNewPet(res));
+        }
+        function validateNewPet(res){
+            if(res==="se ha registrado correctamente"){
+                alert("Se creo la mascota correctamente");
+            }else{
+                alert(res.toString());
+            }location.reload();
+        }
+        Ubutton.onclick = function () {
+            var username = findUsername();
+            var pet_id=document.getElementById("petid").value;
+            var microchip
+            var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' + username + '/pets/'+pet_id;
+            if( document.getElementById("microchipU").value==="") {
+                microchip=null;
+            }else{
+                microchip=Number(document.getElementById("microchip").value)
+            }
+            var data = {
+                "microchip":microchip,
+                "name": document.getElementById("nameU").value,
+                "species": document.formU.speciesU[document.formU.speciesU.selectedIndex].text,
+                "race": document.getElementById("raceU").value,
+                "size":  document.formU.sizeU[document.formU.sizeU.selectedIndex].text,
+                "sex":  document.formU.sexU[document.formU.sexU.selectedIndex].text
+                //,"picture":document.getElementById("imagePet").value
+            };
+            fetch(url, {
+                method: 'PUT',
+                body: JSON.stringify(data), // data can be `string` or {object}!
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.text())
+                .then(res => validateUpPet(res));
+        }
+        function validateUpPet(res){
+            if(res==="Se ha modificado exitosamente!"){
+                alert("Se ha modificado la mascota exitosamente!");
+            }else{
+                alert(res.toString());
+            }location.reload();
+        }
+        Casebutton.onclick = function () {
+            var username = findUsername();
+            var pet_id=document.getElementById("petidC").value;
+            var create_at=document.getElementById("caseDate").value;
+            var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/' + username + '/pet/'+pet_id+'/petCases';
+
+            var data = {
+                "created_at":create_at.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3/$2/$1'),
+                "type": document.formCase.typeCase[document.formCase.typeCase.selectedIndex].text,
+                "description": document.getElementById("description").value
+            };
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(data), // data can be `string` or {object}!
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.text())
+                .then(res => validateMessage(res));
+        }
+        function validateMessage(res){
+            if(res==="se ha registrado correctamente"){
+                alert("Se creo el caso correctamente");
+            }else{
+                alert(res.toString());
+            }location.reload();
         }
         Userbutton.onclick = function () {
             var username = findUsername();
             var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/' + username;
 
-            console.log(document.formUser.neighborhoodUser[document.formUser.neighborhoodUser.selectedIndex].text);
+
             var data = {
                 "username": username,
                 "password": null,
@@ -409,13 +465,15 @@
             };
 
             fetch(url, {
-                method: 'PUT', // or 'PUT'
+                method: 'PUT',
                 body: JSON.stringify(data), // data can be `string` or {object}!
                 headers: {
                     'Content-Type': 'application/json'
                 }
             }).then(res => res.text())
                 .then(response => console.log('Success:', response));
+            alert("Se actualizaron los datos ");
+            location.reload();
         }
 
     </script>

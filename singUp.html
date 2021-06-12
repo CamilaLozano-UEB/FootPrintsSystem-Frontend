@@ -18,15 +18,16 @@
     <form id="formSingUp" method="get">
         <fieldset id="fieldSetForm">
         </fieldset>
+        <button id="createButton" type="button" disabled>Registrar</button>
     </form>
 </div>
 
 <script type="text/javascript">
     function ShowFields() {
         var fieldSetForm = document.getElementById("fieldSetForm");
-        var listTitlesVet = ["Usuario: ", "Contraseña:", "Email: ","Nombre de la Veterinaria: ", "Direccion: ", "Localidad:"];
+        var listTitlesVet = ["Usuario: ", "Contraseña:", "Email: ", "Nombre de la Veterinaria: ", "Direccion: ", "Localidad:"];
         var listTitlesOwner = ["Usuario: ", "Contraseña:", "Email: ", "Documento de identidad: ", "Nombre Completo: ", "Direccion: ", "Localidad: "];
-        var listAtributesVet = ["nameVet", "addressVet", "neigborhoodVet"];
+        var listAtributesVet = ["usernameVet", "passwordVet", "emailVet", "nameVet", "addressVet", "neigborhoodVet"];
         var listAtributesOwner = ["username", "password", "email", "person_id", "name", "address", "neighborhood"];
         var role = document.getElementById("listSingUp").value;
 
@@ -46,10 +47,29 @@
                 div.appendChild(input);
                 div.appendChild(document.createElement("br"));
             }
-            var inputButton = document.createElement("button");
-            inputButton.type = "submit";
+            var inputButton = document.getElementById("createButton");
+            inputButton.disabled = false;
             inputButton.textContent = "Registrar";
-            //inputButton.addEventListener("click",)//Aquí va la función
+            inputButton.addEventListener("click", function createVet() {
+
+                var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/vet';
+                var data = {
+                    "username": document.getElementById("usernameVet").value,
+                    "password": document.getElementById("passwordVet").value,
+                    "email": document.getElementById("emailVet").value,
+                    "name": document.getElementById("nameVet").value,
+                    "address": document.getElementById("addressVet").value,
+                    "neighborhood": document.getElementById("neigborhoodVet").value
+                };
+
+                fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify(data), // data can be `string` or {object}!
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(res => res.text()).then(res =>validateResponseVet(res));
+            })
             div.appendChild(inputButton);
 
             fieldSetForm.appendChild(div);
@@ -67,10 +87,30 @@
                 div.appendChild(input);
                 div.appendChild(document.createElement("br"));
             }
-            var inputButton = document.createElement("button");
-            inputButton.type = "submit";
+            var inputButton = document.getElementById("createButton");
+            inputButton.disabled = false;
             inputButton.textContent = "Registrar";
-            //inputButton.addEventListener("click",)//Aquí va la función
+            inputButton.addEventListener("click", function createOwner() {
+
+                var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners';
+                var data = {
+                    "username": document.getElementById("username").value,
+                    "password": document.getElementById("password").value,
+                    "email": document.getElementById("email").value,
+                    "person_id": document.getElementById("person_id").value,
+                    "name": document.getElementById("name").value,
+                    "address": document.getElementById("address").value,
+                    "neighborhood": document.getElementById("neighborhood").value
+                };
+
+                fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify(data), // data can be `string` or {object}!
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(res => res.text()).then(res =>validateResponseOwner(res));
+            })
             div.appendChild(inputButton);
 
             fieldSetForm.appendChild(div);
@@ -79,27 +119,26 @@
             alert("Seleccione una opción para continuar");
         }
     }
-    function createOwner() {
-        var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners';
-        var data = {
-            "username": "pio",
-            "password": "15632",
-            "email": "adssda",
-            "person_id": 130,
-            "name": "el pepe",
-            "address": "avenida tu corazon",
-            "neighborhood": "fontibon"
-        };
 
-        fetch(url, {
-            method: 'POST', // or 'PUT'
-            body: JSON.stringify(data), // data can be `string` or {object}!
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => res.json())
-            .then(response => console.log('Success:', response));
+    function validateResponseOwner(res) {
+        if ("se ha registrado correctamente" === res) {
+        alert("Se creo el propietario correctamente");
+        window.location.href = "login.html";
+        }else{
+            alert("Ocurre un problema al crear el propietario, revise los datos ");
+            location.reload();
+        }
     }
+    function validateResponseVet(res) {
+        if ("se ha registrado correctamente la veterinaria" === res) {
+            alert("Se creo la veterinaria correctamente");
+            window.location.href = "login.html";
+        }else{
+            alert("Ocurre un problema al crear la veterinaria, revise los datos ");
+            location.reload();
+        }
+    }
+
 </script>
 </body>
 </html>

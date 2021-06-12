@@ -44,13 +44,14 @@
     }
 
     function redirect(role) {
-        var rolhref=role+".html";
-        if (role === "owner")
-            role = "owners";
         if (role != "owner"&&role != "vet"&&role != "official"){
-            alert("Contraseña o usuario erroneos. Intente de nuevo");
-            location.reload();
+        alert("Contraseña o usuario erroneos. Intente de nuevo");
+        location.reload();
+
         }else{
+            var rolhref=role+".html";
+            if (role === "owner")
+                role = "owners";
             let url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/' + role;
 
             let username = document.getElementById("user").value;
