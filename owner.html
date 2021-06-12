@@ -349,25 +349,56 @@
         </div>
     </div>
     <script type="text/javascript">
-        var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners';
-        var data = {
-            "username": "pio",
-            "password": "15632",
-            "email": "adssda",
-            "person_id": 130,
-            "name": "el pepe",
-            "address": "avenida tu corazon",
-            "neighborhood": "fontibon"
-        };
+        var Cbutton = document.getElementById("Cpets");
+        var Userbutton = document.getElementById("Uuser");
+        function findUsername(){
+            var url=window.location.href
+            var part= url.split("?");
+            return(part[1])
+        }
+        //aun no esta listo
+        Cbutton.onclick=function (){
+            var username=findUsername();
+            var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/'+username+'/pets';
+            var data = {
+                "username": username,
 
-        fetch(url, {
-            method: 'POST', // or 'PUT'
-            body: JSON.stringify(data), // data can be `string` or {object}!
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => res.json())
-            .then(response => console.log('Success:', response));
+            };
+
+            fetch(url, {
+                method: 'POST', // or 'PUT'
+                body: JSON.stringify(data), // data can be `string` or {object}!
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.text())
+                .then(response => console.log('Success:', response));
+       }
+        Userbutton.onclick=function (){
+            var username=findUsername();
+            var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/'+username;
+
+            console.log(document.formUser.neighborhoodUser[document.formUser.neighborhoodUser.selectedIndex].text);
+            var data = {
+                "username": username,
+                "password": null,
+                "email": null,
+                "person_id": 0,
+                "name": null,
+                "address":document.getElementById("addressUser").value,
+                "neighborhood":document.formUser.neighborhoodUser[document.formUser.neighborhoodUser.selectedIndex].text
+            };
+
+            fetch(url, {
+                method: 'PUT', // or 'PUT'
+                body: JSON.stringify(data), // data can be `string` or {object}!
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.text())
+                .then(response => console.log('Success:', response));
+        }
+
     </script>
 
 </div>

@@ -1,5 +1,4 @@
-
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>FourPawsCitizens</title>
@@ -19,27 +18,50 @@
             <input type="password" name="password" id="password" required>
             <br>
             <br>
-            <input id="logButton" type="submit" class="btn btn-primary" value="Ingresar">
+            <button id="logButton" type="button" onclick= "findRole()">Ingresar</button>
         </fieldset>
     </form>
-    <a type="button" href="">Registrarse</a>
+    <a type="button" href="singUp.html">Registrarse</a>
 </div>
 <script type="text/javascript">
-    var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners';
+    function findRole() {
+        let url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/userApp';
+        let username = document.getElementById("user").value;
+        let password = document.getElementById("password").value;
 
-    let username = 'pip';
-    let password = '15632';
+        let headers = new Headers();
 
-    let headers = new Headers();
+        headers.append('Content-Type', 'text/json');
+        headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
 
-    headers.append('Content-Type', 'text/json');
-    headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
+        fetch(url, {
+            method: 'GET',
+            headers: headers,
+        })
+            .then(response => response.text())
+            .then(response => redirect(response.toString()));
 
-    fetch(url, {method:'GET',
-        headers: headers,
-    })
-        .then(response => response.json())
-        .then(json => console.log(json));
+    }
+
+    function redirect(role) {
+        var rolhref=role+".html";
+        if (role === "owner")
+            role = "owners";
+        let url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/' + role;
+
+        let username = document.getElementById("user").value;
+        let password = document.getElementById("password").value;
+        let headers = new Headers();
+
+        headers.append('Content-Type', 'text/json');
+        headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
+
+        fetch(url, {
+            method: 'GET',
+            headers: headers,
+        }).then(response => response.ok).then(window.location.href= rolhref+"?"+username);
+
+    }
 </script>
 </body>
 </html>

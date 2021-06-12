@@ -10,7 +10,9 @@ input{
 }
 button{
     font-family: Verdana;
-    border-radius: 30px;
+    border-radius: 50px;
+    width: 40%;
+    height: 9%;
 }
 .login {
     font-family: Verdana;
