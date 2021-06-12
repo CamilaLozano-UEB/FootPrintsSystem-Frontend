@@ -5,12 +5,29 @@
     <title>Four Pets Citizens</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/styles.css" type="text/css">
-
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+    <script
+            src="http://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="Javascript/Navigation.js"></script>
 </head>
 
 <nav>
@@ -235,7 +252,7 @@
     <div class="tab-pane fade" id="find" role="tabpanel" aria-labelledby="find-tab" align="center">
         <div class="configureStyleMainBox">
             <h2 class="titles">Tabla de Mascotas del Propietario</h2>
-            <table id="tablePets" class="table table-striped">
+            <table id="myTableOwner" class="table table-fluid">
                 <thead>
                 <tr>
                     <th scope="col">Actualizar</th>
@@ -274,7 +291,7 @@
 
             <br>
             <div style="float: left; width: 50%;">
-                <table id="tableCases" class="table table-striped">
+                <table id="tableCases" class="table table-fluid">
                     <thead>
                     <tr>
                         <th scope="col">ID de la visita</th>
@@ -288,7 +305,7 @@
                 </table>
             </div>
             <div style="float: left; width: 50%;">
-                <table id="tableVisit" class="table table-striped">
+                <table id="tableVisit" class="table table-fluid">
                     <thead>
                     <tr>
                         <th scope="col">ID de la Case</th>
@@ -351,15 +368,17 @@
     <script type="text/javascript">
         var Cbutton = document.getElementById("Cpets");
         var Userbutton = document.getElementById("Uuser");
-        function findUsername(){
-            var url=window.location.href
-            var part= url.split("?");
-            return(part[1])
+
+        function findUsername() {
+            var url = window.location.href
+            var part = url.split("?");
+            return (part[1])
         }
+
         //aun no esta listo
-        Cbutton.onclick=function (){
-            var username=findUsername();
-            var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/'+username+'/pets';
+        Cbutton.onclick = function () {
+            var username = findUsername();
+            var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' + username + '/pets';
             var data = {
                 "username": username,
 
@@ -373,10 +392,10 @@
                 }
             }).then(res => res.text())
                 .then(response => console.log('Success:', response));
-       }
-        Userbutton.onclick=function (){
-            var username=findUsername();
-            var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/'+username;
+        }
+        Userbutton.onclick = function () {
+            var username = findUsername();
+            var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/' + username;
 
             console.log(document.formUser.neighborhoodUser[document.formUser.neighborhoodUser.selectedIndex].text);
             var data = {
@@ -385,8 +404,8 @@
                 "email": null,
                 "person_id": 0,
                 "name": null,
-                "address":document.getElementById("addressUser").value,
-                "neighborhood":document.formUser.neighborhoodUser[document.formUser.neighborhoodUser.selectedIndex].text
+                "address": document.getElementById("addressUser").value,
+                "neighborhood": document.formUser.neighborhoodUser[document.formUser.neighborhoodUser.selectedIndex].text
             };
 
             fetch(url, {
