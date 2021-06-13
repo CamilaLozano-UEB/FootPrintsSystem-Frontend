@@ -132,7 +132,7 @@
                 <fieldset>
                     <legend> Formulario de Actualizar de mascotas</legend>
                     <label for="petid">ID de la mascota:</label><br>
-                    <input id="petid" type="text" name="petid" disabled required>
+                    <input id="petid" type="text" name="petid"  required>
                     <br>
                     <br>
                     <label for="nameU">Ingrese su nombre de la mascota:</label><br>
@@ -354,6 +354,19 @@
          * Get the parameters of the form and send it to the rest in backend for create a pet
          */
         Cbutton.onclick = function () {
+            var photo= document.getElementById("imagePet");
+            var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/upload';
+
+            const formData= new FormData();
+            formData.append('file', photo.files[0]);
+
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            }).then(res => res.text())
+                .then(res => createPet(res));
+        }
+        function createPet(fileD){
             var username = findUsername();
             var microchip
             var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' + username + '/pets';
@@ -362,8 +375,9 @@
             } else {
                 microchip = Number(document.getElementById("microchip").value)
             }
-            if (isNaN(microchip) || document.formC.species[document.formC.species.selectedIndex].text == "Seleccione"
-                || document.formC.size[document.formC.size.selectedIndex].text == "Seleccione" || document.formC.sex[document.formC.sex.selectedIndex].text == "Seleccione") {
+            if (isNaN(microchip) || document.formC.species[document.formC.species.selectedIndex].text === "Seleccione"
+                || document.formC.size[document.formC.size.selectedIndex].text === "Seleccione" || document.formC.sex[document.formC.sex.selectedIndex].text === "Seleccione"
+                 ||fileD==="unknown") {
                 alert("Los datos ingresados son incorrectos");
                 return;
             }
@@ -373,8 +387,8 @@
                 "species": document.formC.species[document.formC.species.selectedIndex].text,
                 "race": document.getElementById("race").value,
                 "size": document.formC.size[document.formC.size.selectedIndex].text,
-                "sex": document.formC.sex[document.formC.sex.selectedIndex].text
-                //,"picture":document.getElementById("imagePet").value
+                "sex": document.formC.sex[document.formC.sex.selectedIndex].text,
+                "picture":fileD
             };
             fetch(url, {
                 method: 'POST',
@@ -403,6 +417,20 @@
          * Get the parameters of the form and send it to the rest in backend for update a pet
          */
         Ubutton.onclick = function () {
+            var photo= document.getElementById("imagePetU");
+            var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/upload';
+
+            const formData= new FormData();
+            formData.append('file', photo.files[0]);
+
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            }).then(res => res.text())
+                .then(res => updatePet(res));
+        }
+
+        function updatePet(fileD) {
             var username = findUsername();
             var pet_id = Number(document.getElementById("petid").value);
             var microchip
@@ -410,10 +438,11 @@
             if (document.getElementById("microchipU").value === "") {
                 microchip = null;
             } else {
-                microchip = Number(document.getElementById("microchip").value)
+                microchip = Number(document.getElementById("microchipU").value)
             }
-            if (isNaN(microchip) || isNaN(pet_id) || document.formU.speciesU[document.formU.speciesU.selectedIndex].text == "Seleccione"
-                || document.formU.sizeU[document.formU.sizeU.selectedIndex].text == "Seleccione" || document.formU.sexU[document.formU.sexU.selectedIndex].text == "Seleccione") {
+            if (isNaN(microchip) || isNaN(pet_id) || document.formU.speciesU[document.formU.speciesU.selectedIndex].text === "Seleccione"
+                || document.formU.sizeU[document.formU.sizeU.selectedIndex].text === "Seleccione" || document.formU.sexU[document.formU.sexU.selectedIndex].text === "Seleccione"
+                ||fileD==="unknown") {
                 alert("Los datos ingresados son incorrectos");
                 return;
             }
@@ -423,9 +452,10 @@
                 "species": document.formU.speciesU[document.formU.speciesU.selectedIndex].text,
                 "race": document.getElementById("raceU").value,
                 "size": document.formU.sizeU[document.formU.sizeU.selectedIndex].text,
-                "sex": document.formU.sexU[document.formU.sexU.selectedIndex].text
-                //,"picture":document.getElementById("imagePet").value
+                "sex": document.formU.sexU[document.formU.sexU.selectedIndex].text,
+                "picture":fileD
             };
+            console.log(data)
             fetch(url, {
                 method: 'PUT',
                 body: JSON.stringify(data), // data can be `string` or {object}!
@@ -454,7 +484,7 @@
             var pet_id = Number(document.getElementById("petidC").value);
             var create_at = document.getElementById("caseDate").value;
             var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/' + username + '/pet/' + pet_id + '/petCases';
-            if (document.formCase.typeCase[document.formCase.typeCase.selectedIndex].text == "Seleccione" || isNaN(pet_id)) {
+            if (document.formCase.typeCase[document.formCase.typeCase.selectedIndex].text === "Seleccione" || isNaN(pet_id)) {
                 alert("Los datos ingresados son incorrectos");
                 return;
             }
@@ -490,7 +520,7 @@
         Userbutton.onclick = function () {
             var username = findUsername();
             var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/' + username;
-            if (document.formUser.neighborhoodUser[document.formUser.neighborhoodUser.selectedIndex].text == "Seleccione") {
+            if (document.formUser.neighborhoodUser[document.formUser.neighborhoodUser.selectedIndex].text === "Seleccione") {
                 alert("Es necesario selecionar una localidad");
                 return;
             }
