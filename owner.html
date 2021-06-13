@@ -132,7 +132,7 @@
                 <fieldset>
                     <legend> Formulario de Actualizar de mascotas</legend>
                     <label for="petid">ID de la mascota:</label><br>
-                    <input id="petid" type="text" name="petid"  required>
+                    <input id="petid" type="text" name="petid" required disabled>
                     <br>
                     <br>
                     <label for="nameU">Ingrese su nombre de la mascota:</label><br>
@@ -354,10 +354,10 @@
          * Get the parameters of the form and send it to the rest in backend for create a pet
          */
         Cbutton.onclick = function () {
-            var photo= document.getElementById("imagePet");
+            var photo = document.getElementById("imagePet");
             var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/upload';
 
-            const formData= new FormData();
+            const formData = new FormData();
             formData.append('file', photo.files[0]);
 
             fetch(url, {
@@ -366,7 +366,8 @@
             }).then(res => res.text())
                 .then(res => createPet(res));
         }
-        function createPet(fileD){
+
+        function createPet(fileD) {
             var username = findUsername();
             var microchip
             var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' + username + '/pets';
@@ -377,7 +378,7 @@
             }
             if (isNaN(microchip) || document.formC.species[document.formC.species.selectedIndex].text === "Seleccione"
                 || document.formC.size[document.formC.size.selectedIndex].text === "Seleccione" || document.formC.sex[document.formC.sex.selectedIndex].text === "Seleccione"
-                 ||fileD==="unknown") {
+                || fileD === "unknown") {
                 alert("Los datos ingresados son incorrectos");
                 return;
             }
@@ -388,7 +389,7 @@
                 "race": document.getElementById("race").value,
                 "size": document.formC.size[document.formC.size.selectedIndex].text,
                 "sex": document.formC.sex[document.formC.sex.selectedIndex].text,
-                "picture":fileD
+                "picture": fileD
             };
             fetch(url, {
                 method: 'POST',
@@ -417,10 +418,10 @@
          * Get the parameters of the form and send it to the rest in backend for update a pet
          */
         Ubutton.onclick = function () {
-            var photo= document.getElementById("imagePetU");
+            var photo = document.getElementById("imagePetU");
             var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/upload';
 
-            const formData= new FormData();
+            const formData = new FormData();
             formData.append('file', photo.files[0]);
 
             fetch(url, {
@@ -442,7 +443,7 @@
             }
             if (isNaN(microchip) || isNaN(pet_id) || document.formU.speciesU[document.formU.speciesU.selectedIndex].text === "Seleccione"
                 || document.formU.sizeU[document.formU.sizeU.selectedIndex].text === "Seleccione" || document.formU.sexU[document.formU.sexU.selectedIndex].text === "Seleccione"
-                ||fileD==="unknown") {
+                || fileD === "unknown") {
                 alert("Los datos ingresados son incorrectos");
                 return;
             }
@@ -453,7 +454,7 @@
                 "race": document.getElementById("raceU").value,
                 "size": document.formU.sizeU[document.formU.sizeU.selectedIndex].text,
                 "sex": document.formU.sexU[document.formU.sexU.selectedIndex].text,
-                "picture":fileD
+                "picture": fileD
             };
             console.log(data)
             fetch(url, {
