@@ -161,3 +161,25 @@ Styles for the vet sing up interface
     position: absolute;
     left: 29.5%;
 }
+
+.filters {
+    float: left;
+    width: 30%;
+    padding: 30px;
+    background: #FFFFFF44;
+
+
+}
+
+.tablefilters {
+    float: left;
+    width: 70%;
+    padding: 30px;
+    background: #FFFFFF44;
+}
+
+.officialBack {
+    background-image: url("../imgs/5pets.jpg");
+    background-size: cover;
+    background-position: revert;
+}

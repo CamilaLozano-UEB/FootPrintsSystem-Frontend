@@ -28,7 +28,6 @@
     <script src="Javascript/Navigation.js"></script>
     <link rel="stylesheet" href="css/styles.css" type="text/css">
 </head>
-<body class="vetBack">
 
 <!--Navigation of the vet interface-->
 <nav>
@@ -47,6 +46,8 @@
         </li>
     </ul>
 </nav>
+
+<body class="vetBack">
 
 <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="register" role="tabpanel" aria-labelledby="register-tab" align="center">
@@ -226,7 +227,7 @@
         if (type == "Implantación de microchip") {
             var microchip = Number(document.getElementById("microchip").value);
             type = "implantación de microchip";
-            if(isNaN(microchip)||isNaN(pet_id)||type=="Seleccione"){
+            if (isNaN(microchip) || isNaN(pet_id) || type == "Seleccione") {
                 alert("Los datos ingresados son incorrectos");
                 return;
             }
@@ -248,7 +249,7 @@
             }).then(res => res.text())
                 .then(response => showAlert(response));
         } else {
-            if(isNaN(pet_id)||type=="Seleccione"){
+            if (isNaN(pet_id) || type == "Seleccione") {
                 alert("Los datos ingresados son incorrectos");
                 return;
             }
@@ -288,7 +289,7 @@
     vetButton.onclick = function () {
         var username = findUsername();
         var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/vet/' + username;
-        if(document.formUser.neighborhoodUser[document.formUser.neighborhoodUser.selectedIndex].text=="Seleccione"){
+        if (document.formUser.neighborhoodUser[document.formUser.neighborhoodUser.selectedIndex].text == "Seleccione") {
             alert("Es necesario selecionar una localidad");
             return;
         }
