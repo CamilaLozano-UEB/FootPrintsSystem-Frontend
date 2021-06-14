@@ -1,3 +1,4 @@
+/*call the buttons in owner.html*/
 var Cbutton = document.getElementById("Cpets");
 var Ubutton = document.getElementById("Upets");
 var Casebutton = document.getElementById("caseB");
@@ -14,7 +15,7 @@ function findUsername() {
 }
 
 /**
- * Get the parameters of the form and send it to the rest in backend for create a pet
+ *Send the file image to the rest in backend of create pet
  */
 Cbutton.onclick = function () {
     var photo = document.getElementById("imagePet");
@@ -30,7 +31,17 @@ Cbutton.onclick = function () {
         .then(res => createPet(res));
 }
 
+/**
+ * Get the parameters of the form and send it to the rest in backend for create a pet
+ * @param fileD the name of the photo
+ */
 function createPet(fileD) {
+    if(fileD==="No es una imagen"){
+        alert("El archivo adjuntado no es una image")
+        return;
+    }if(fileD === "unknown"){
+        fileD= "unknown.jpg"
+    }
     var username = findUsername();
     var microchip
     var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' + username + '/pets';
@@ -40,8 +51,7 @@ function createPet(fileD) {
         microchip = Number(document.getElementById("microchip").value)
     }
     if (isNaN(microchip) || document.formC.species[document.formC.species.selectedIndex].text === "Seleccione"
-        || document.formC.size[document.formC.size.selectedIndex].text === "Seleccione" || document.formC.sex[document.formC.sex.selectedIndex].text === "Seleccione"
-        || fileD === "unknown") {
+        || document.formC.size[document.formC.size.selectedIndex].text === "Seleccione" || document.formC.sex[document.formC.sex.selectedIndex].text === "Seleccione") {
         alert("Los datos ingresados son incorrectos");
         return;
     }
@@ -78,7 +88,7 @@ function validateNewPet(res) {
 }
 
 /**
- * Get the parameters of the form and send it to the rest in backend for update a pet
+ * Send the file image to the rest in backend of update
  */
 Ubutton.onclick = function () {
     var photo = document.getElementById("imagePetU");
@@ -93,8 +103,17 @@ Ubutton.onclick = function () {
     }).then(res => res.text())
         .then(res => updatePet(res));
 }
-
+/**
+ *  Get the parameters of the form and send it to the rest in backend for update a pet
+ * @param fileD the name of the photo
+ */
 function updatePet(fileD) {
+    if(fileD==="No es una imagen"){
+        alert("El archivo adjuntado no es una image")
+        return;
+    }if(fileD === "unknown"){
+        fileD= "unknown.jpg"
+    }
     var username = findUsername();
     var pet_id = Number(document.getElementById("petid").value);
     var microchip
@@ -105,8 +124,7 @@ function updatePet(fileD) {
         microchip = Number(document.getElementById("microchipU").value)
     }
     if (isNaN(microchip) || isNaN(pet_id) || document.formU.speciesU[document.formU.speciesU.selectedIndex].text === "Seleccione"
-        || document.formU.sizeU[document.formU.sizeU.selectedIndex].text === "Seleccione" || document.formU.sexU[document.formU.sexU.selectedIndex].text === "Seleccione"
-        || fileD === "unknown") {
+        || document.formU.sizeU[document.formU.sizeU.selectedIndex].text === "Seleccione" || document.formU.sexU[document.formU.sexU.selectedIndex].text === "Seleccione") {
         alert("Los datos ingresados son incorrectos");
         return;
     }
@@ -130,6 +148,10 @@ function updatePet(fileD) {
         .then(res => validateUpPet(res));
 }
 
+/**
+ *Valid the response message
+ * @param res the response message
+ */
 function validateUpPet(res) {
     if (res === "Se ha modificado exitosamente!") {
         alert("Se ha modificado la mascota exitosamente!");
@@ -168,7 +190,10 @@ Casebutton.onclick = function () {
     }).then(res => res.text())
         .then(res => validateMessage(res));
 }
-
+/**
+ *Valid the response message
+ * @param res the response message
+ */
 function validateMessage(res) {
     if (res === "se ha registrado correctamente") {
         alert("Se creo el caso correctamente");
@@ -210,7 +235,9 @@ Userbutton.onclick = function () {
     alert("Se actualizaron los datos ");
     location.reload();
 }
-
+/**
+ * Get the pets of the rest in the backend
+ */
 document.getElementById("find-tab").addEventListener("click", function () {
 
     var username = findUsername();
@@ -220,6 +247,10 @@ document.getElementById("find-tab").addEventListener("click", function () {
     }).then(response => response.json()).then(response => fillPetsTable(response));
 });
 
+/**
+ * Paint the table of the pets
+ * @param petList, list of the pets
+ */
 function fillPetsTable(petList) {
     let table = document.getElementById("myTableOwner");
     if (document.getElementById("tBodyPets") !== null) {
@@ -259,20 +290,32 @@ function fillPetsTable(petList) {
                 td.textContent = petList[i][property];
                 if (property === "picture") {
                     var image = document.createElement("img");
-                    image.src = td.textContent;
-                    image.width = document.body.clientWidth / 6;
-                    td.textContent = "";
-                    td.appendChild(image);
+                    if(petList[i][property]==="http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/image/unknown.jpg"){
+                        image.src ="imgs/unknown.jpg";
+                        image.width = document.body.clientWidth / 6;
+                        td.textContent = "";
+                        td.appendChild(image);
+                    }else{
+                        image.src = td.textContent;
+                        image.width = document.body.clientWidth / 6;
+                        td.textContent = "";
+                        td.appendChild(image);
+                    }
+
                 }
                 tr.appendChild(td);
             }
         }
         tBody.appendChild(tr);
-        table.appendChild(tBody);
-    }
+
+    } table.appendChild(tBody);
     $('#myTableOwner').DataTable();
 }
 
+/**
+ * The button is configured anf add the listener
+ * @param button the button of update
+ */
 function updateButtonConfiguration(button) {
     button.type = "button";
     button.textContent = "Actualizar";
@@ -284,7 +327,10 @@ function updateButtonConfiguration(button) {
         document.getElementById("petid").value = button.id;
     })
 }
-
+/**
+ * The button is configured anf add the listener
+ * @param button the button of update
+ */
 function caseButtonConfiguration(button) {
     button.type = "button";
     button.textContent = "Crear caso";
@@ -296,7 +342,10 @@ function caseButtonConfiguration(button) {
         document.getElementById("petidC").value = button.id;
     })
 }
-
+/**
+ * The button is configured anf add the listener
+ * @param button the button of update
+ */
 function caseVisitButtonConfiguration(button) {
     button.type = "button";
     button.textContent = "Ver casos y visitas";
@@ -307,15 +356,31 @@ function caseVisitButtonConfiguration(button) {
         document.getElementById("find-tab").className = "nav-link";
         document.getElementById("CaseAndVisits-tab").className = "nav-link active";
         document.getElementById("petIdCV").value = button.id;
+        dotableVisitCase();
     })
 }
 
+/**
+ * Get all visits and cases of the owner
+ */
+function dotableVisitCase() {
+    var username = findUsername();
+    var url = new URL('http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' +
+        username + "/pets/" + document.getElementById("petIdCV").value + "/visitsCasesAll")
+
+    fetch(url, {
+        method: 'GET'
+    }).then(response => response.json()).then(response => fillCasesAndVisitTable(response));
+}
+
+/**
+ * Get the visits and cases between dates of the owner
+ */
 document.getElementById("filter").addEventListener("click", function () {
     var username = findUsername();
     var url = new URL('http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' +
         username + "/pets/" + document.getElementById("petIdCV").value + "/visitsCases")
 
-    var params = {lat: 35.696233, long: 139.570431} // or:
     var params = [
         ['initialDate', document.getElementById("Date1").value.replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1')],
         ['finalDate', document.getElementById("Date2").value.replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1')]]
@@ -327,25 +392,43 @@ document.getElementById("filter").addEventListener("click", function () {
     }).then(response => response.json()).then(response => fillCasesAndVisitTable(response));
 });
 
+/**
+ * Paint the table of visits and cases
+ * @param visitCaseList the list of visits and cases
+ */
 function fillCasesAndVisitTable(visitCaseList) {
     let table = document.getElementById("myTableCaseVisitOwner");
     if (document.getElementById("tBodyCaseVisit") !== null) {
-        $('#OwnerTableVisitsCase').DataTable().destroy();
+        $('#myTableCaseVisitOwner').DataTable().destroy();
         table.removeChild(document.getElementById("tBodyCaseVisit"));
     }
     let tBody = document.createElement("tbody");
     tBody.id = "tBodyCaseVisit";
     if (visitCaseList.length === 0)
         alert("No se encontró información");
+    var cont=1;
     for (let i = 0; i < visitCaseList.length; i++) {
         const tr = document.createElement("tr");
+        let td = document.createElement("td");
+        td.textContent = cont;
+        tr.appendChild(td);
+        cont++;
         for (const property in visitCaseList[i]) {
-            let td = document.createElement("td");
-            td.textContent = visitCaseList[i][property];
-            tr.appendChild(td);
+            if (property === "createdAt") {
+                var d = new Date(visitCaseList[i][property]);
+                var date = +d.getDate()  + "/" + (d.getMonth()+1) + "/" + d.getFullYear() ;
+                let td = document.createElement("td");
+                td.textContent = date;
+                tr.appendChild(td);
+            }else{
+                let td = document.createElement("td");
+                td.textContent = visitCaseList[i][property];
+                tr.appendChild(td);
+            }
+
         }
         tBody.appendChild(tr);
-        table.appendChild(tBody);
-    }
+
+    }table.appendChild(tBody);
     $('#myTableCaseVisitOwner').DataTable();
 }
