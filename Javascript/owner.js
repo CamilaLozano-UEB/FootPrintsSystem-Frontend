@@ -18,7 +18,7 @@ function findUsername() {
  */
 Cbutton.onclick = function () {
     var photo = document.getElementById("imagePet");
-    var url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/upload';
+    var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/upload';
 
     const formData = new FormData();
     formData.append('file', photo.files[0]);
@@ -33,7 +33,7 @@ Cbutton.onclick = function () {
 function createPet(fileD) {
     var username = findUsername();
     var microchip
-    var url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' + username + '/pets';
+    var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' + username + '/pets';
     if (document.getElementById("microchip").value === "") {
         microchip = null;
     } else {
@@ -82,7 +82,7 @@ function validateNewPet(res) {
  */
 Ubutton.onclick = function () {
     var photo = document.getElementById("imagePetU");
-    var url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/upload';
+    var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/upload';
 
     const formData = new FormData();
     formData.append('file', photo.files[0]);
@@ -98,7 +98,7 @@ function updatePet(fileD) {
     var username = findUsername();
     var pet_id = Number(document.getElementById("petid").value);
     var microchip
-    var url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' + username + '/pets/' + pet_id;
+    var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' + username + '/pets/' + pet_id;
     if (document.getElementById("microchipU").value === "") {
         microchip = null;
     } else {
@@ -147,7 +147,7 @@ Casebutton.onclick = function () {
     var username = findUsername();
     var pet_id = Number(document.getElementById("petidC").value);
     var create_at = document.getElementById("caseDate").value;
-    var url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/' + username + '/pet/' + pet_id + '/petCases';
+    var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/' + username + '/pet/' + pet_id + '/petCases';
     if (document.formCase.typeCase[document.formCase.typeCase.selectedIndex].text === "Seleccione" || isNaN(pet_id)) {
         alert("Los datos ingresados son incorrectos");
         return;
@@ -183,7 +183,7 @@ function validateMessage(res) {
  */
 Userbutton.onclick = function () {
     var username = findUsername();
-    var url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/' + username;
+    var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/' + username;
     if (document.formUser.neighborhoodUser[document.formUser.neighborhoodUser.selectedIndex].text === "Seleccione") {
         alert("Es necesario selecionar una localidad");
         return;
@@ -214,7 +214,7 @@ Userbutton.onclick = function () {
 document.getElementById("find-tab").addEventListener("click", function () {
 
     var username = findUsername();
-    var url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/' + username;
+    var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/' + username;
     fetch(url, {
         method: 'GET'
     }).then(response => response.json()).then(response => fillTables(response));
