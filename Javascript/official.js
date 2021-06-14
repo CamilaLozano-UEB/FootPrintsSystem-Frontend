@@ -12,8 +12,10 @@ document.getElementById("officialOwner-tab").addEventListener("click", tabListen
 
 function tabListener() {
     var username = findUsername();
-    if (username === undefined)
+    if (username === undefined){
         alert("Access denied")
+        return
+    }
     var url = new URL('http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/official/' +
         username + '/totalOwners');
 
@@ -64,8 +66,10 @@ function fillTotalOwnersTable(totalOwners) {
 
 document.getElementById("officialPet-tab").addEventListener("click", function () {
     var username = findUsername();
-    if (username === undefined)
+    if (username === undefined){
         alert("Access denied")
+        return
+    }
     var url = new URL('http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/official/' +
         username + '/totalPets');
 
@@ -130,8 +134,10 @@ function fillTotalPetsTable(totalPets) {
 
 document.getElementById("officialCase-tab").addEventListener("click", function () {
     var username = findUsername();
-    if (username === undefined)
+    if (username === undefined){
         alert("Access denied")
+        return
+    }
     var url = new URL('http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/official/' +
         username + '/totalCases');
 
@@ -180,8 +186,10 @@ function fillTotalCasesTable(totalCases) {
 
 document.getElementById("officialVisit-tab").addEventListener("click", function () {
     var username = findUsername();
-    if (username === undefined)
+    if (username === undefined){
         alert("Access denied")
+        return
+    }
     var url = new URL('http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/official/' +
         username + '/totalVisits');
 
@@ -239,8 +247,10 @@ function fillTotalVisitsTable(totalVisits) {
 
 document.getElementById("filterOwner").addEventListener("click", function () {
     var username = findUsername();
-    if (username === undefined)
+    if (username === undefined){
         alert("Access denied")
+        return
+    }
     let url = new URL('http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/official/' +
         username + '/pets');
 
