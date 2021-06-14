@@ -1,24 +1,25 @@
 /**
  * this function find the user and the password in the headers to autorize it
  */
-function findRole() {
-    let url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/userApp';
-    let username = document.getElementById("user").value;
-    let password = document.getElementById("password").value;
+document.getElementById("logButton").onclick =
+    function findRole() {
+        let url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/userApp';
+        let username = document.getElementById("user").value;
+        let password = document.getElementById("password").value;
 
-    let headers = new Headers();
+        let headers = new Headers();
 
-    headers.append('Content-Type', 'text/json');
-    headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
+        headers.append('Content-Type', 'text/json');
+        headers.append('Authorization', 'Basic ' + btoa(username + ":" + password));
 
-    fetch(url, {
-        method: 'GET',
-        headers: headers,
-    })
-        .then(response => response.text())
-        .then(response => redirect(response.toString()));
+        fetch(url, {
+            method: 'GET',
+            headers: headers,
+        })
+            .then(response => response.text())
+            .then(response => redirect(response.toString()));
 
-}
+    }
 
 /**
  * This function take the role of the login, validates it and if its correct redirects to the tab corresponding to the user
