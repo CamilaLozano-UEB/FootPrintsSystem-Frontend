@@ -170,7 +170,7 @@ Casebutton.onclick = function () {
     var pet_id = Number(document.getElementById("petidC").value);
     var create_at = document.getElementById("caseDate").value;
     var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/' + username + '/pet/' + pet_id + '/petCases';
-    if (document.formCase.typeCase[document.formCase.typeCase.selectedIndex].text === "Seleccione" || isNaN(pet_id)) {
+    if (document.formCase.typeCase[document.formCase.typeCase.selectedIndex].text === "Seleccione" || isNaN(pet_id)||create_at==="") {
         alert("Los datos ingresados son incorrectos");
         return;
     }
@@ -381,6 +381,12 @@ document.getElementById("filter").addEventListener("click", function () {
     var url = new URL('http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' +
         username + "/pets/" + document.getElementById("petIdCV").value + "/visitsCases")
 
+    var date1 = document.getElementById("Date1").value;
+    var date2 = document.getElementById("Date2").value;
+    if (date1===""||date2==="") {
+        alert("Para filtar es necesario ingresar las fechas");
+        return;
+    }
     var params = [
         ['initialDate', document.getElementById("Date1").value.replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1')],
         ['finalDate', document.getElementById("Date2").value.replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1')]]
