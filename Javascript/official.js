@@ -12,7 +12,7 @@ document.getElementById("officialOwner-tab").addEventListener("click", tabListen
 
 function tabListener() {
     var username = findUsername();
-    if (username === undefined){
+    if (username === undefined) {
         alert("Access denied")
         return
     }
@@ -66,7 +66,7 @@ function fillTotalOwnersTable(totalOwners) {
 
 document.getElementById("officialPet-tab").addEventListener("click", function () {
     var username = findUsername();
-    if (username === undefined){
+    if (username === undefined) {
         alert("Access denied")
         return
     }
@@ -134,7 +134,7 @@ function fillTotalPetsTable(totalPets) {
 
 document.getElementById("officialCase-tab").addEventListener("click", function () {
     var username = findUsername();
-    if (username === undefined){
+    if (username === undefined) {
         alert("Access denied")
         return
     }
@@ -186,7 +186,7 @@ function fillTotalCasesTable(totalCases) {
 
 document.getElementById("officialVisit-tab").addEventListener("click", function () {
     var username = findUsername();
-    if (username === undefined){
+    if (username === undefined) {
         alert("Access denied")
         return
     }
@@ -245,9 +245,13 @@ function fillTotalVisitsTable(totalVisits) {
     $('#myTableOfficialVisits').DataTable({"bSort": false});
 }
 
-document.getElementById("filterOwner").addEventListener("click", function () {
+document.getElementById("filterOwner").addEventListener("click", fillFilteredPetsTableAction);
+
+fillFilteredPetsTableAction();
+
+function fillFilteredPetsTableAction() {
     var username = findUsername();
-    if (username === undefined){
+    if (username === undefined) {
         alert("Access denied")
         return
     }
@@ -255,14 +259,14 @@ document.getElementById("filterOwner").addEventListener("click", function () {
         username + '/pets');
 
     let params = makeParams();
-console.log(params)
-    if (params[0][0] !== undefined)
+
+    if (params[0] !== undefined)
         url.search = new URLSearchParams(params).toString();
 
     fetch(url, {
         method: 'GET'
     }).then(response => response.json()).then(response => fillFilteredPetsTable(response));
-});
+}
 
 function fillFilteredPetsTable(petsFiltered) {
     let table = document.getElementById("myTableOfficialFilters");
@@ -364,3 +368,6 @@ function makeParams() {
 
     return params;
 }
+
+
+
