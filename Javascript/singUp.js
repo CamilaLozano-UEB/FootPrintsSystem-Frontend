@@ -6,14 +6,17 @@
 document.getElementById("listSingUp").onchange =
     function () {
         var fieldSetForm = document.getElementById("fieldSetForm");
+        var form = document.getElementById("formSingUp");
         var listTitlesVet = ["Usuario: ", "Contraseña:", "Email: ", "Nombre de la Veterinaria: ", "Direccion: ", "Localidad:"];
         var listTitlesOwner = ["Usuario: ", "Contraseña:", "Email: ", "Documento de identidad: ", "Nombre Completo: ", "Direccion: ", "Localidad: "];
         var listAtributesVet = ["usernameVet", "passwordVet", "emailVet", "nameVet", "addressVet", "neigborhoodVet"];
         var listAtributesOwner = ["username", "password", "email", "person_id", "name", "address", "neighborhood"];
         var role = document.getElementById("listSingUp").value;
 
-        if (fieldSetForm.hasChildNodes())
+        if (fieldSetForm.hasChildNodes()) {
             fieldSetForm.removeChild(fieldSetForm.firstChild);
+            form.removeChild(document.getElementById("createButton"));
+        }
         var div = document.createElement("div");
 
         //Shows the form for a vet
@@ -29,8 +32,8 @@ document.getElementById("listSingUp").onchange =
                 div.appendChild(input);
                 div.appendChild(document.createElement("br"));
             }
-            var inputButton = document.getElementById("createButton");
-            inputButton.disabled = false;
+            let inputButton = document.createElement("button");
+            inputButton.id = "createButton";
             inputButton.textContent = "Registrar";
             inputButton.addEventListener("click", function createVet() {
 
@@ -55,7 +58,7 @@ document.getElementById("listSingUp").onchange =
             })
 
             fieldSetForm.appendChild(div);
-
+            form.appendChild(inputButton);
             //Shows the form for the creation of a owner's user
         } else if (role === "ownerSelect") {
             for (var i = 0; i < listTitlesOwner.length; i++) {
@@ -69,8 +72,8 @@ document.getElementById("listSingUp").onchange =
                 div.appendChild(input);
                 div.appendChild(document.createElement("br"));
             }
-            let inputButton = document.getElementById("createButton");
-            inputButton.disabled = false;
+            let inputButton = document.createElement("button");
+            inputButton.id = "createButton";
             inputButton.textContent = "Registrar";
             inputButton.addEventListener("click", function createOwner() {
                 //Takes and send the data to create a new owner user
@@ -100,6 +103,7 @@ document.getElementById("listSingUp").onchange =
             })
 
             fieldSetForm.appendChild(div);
+            form.appendChild(inputButton);
 
         } else {
             alert("Seleccione una opción para continuar");
