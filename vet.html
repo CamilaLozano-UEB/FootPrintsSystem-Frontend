@@ -33,15 +33,16 @@
 <nav>
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" id="register-tab" data-toggle="tab" href="#register" role="tab"
-               aria-controls="register" aria-selected="true">Crear Visita</a>
+            <a class="nav-link active" id="registerVisit-tab" data-toggle="tab" href="#registerVisit" role="tab"
+               aria-controls="registerVisit" aria-selected="true">Crear Visita</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="find-tab" data-toggle="tab" href="#find" role="tab" aria-controls="find"
+            <a class="nav-link" id="VisitTablePet-tab" data-toggle="tab" href="#VisitTablePet" role="tab"
+               aria-controls="VisitTablePet"
                aria-selected="false">Tabla de Visitas</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="Upuser-tab" data-toggle="tab" href="#Upuser" role="tab" aria-controls="Upuser"
+            <a class="nav-link" id="UpVet-tab" data-toggle="tab" href="#UpVet" role="tab" aria-controls="UpVet"
                aria-selected="false">Cambiar datos de Veterinaria</a>
         </li>
     </ul>
@@ -50,7 +51,8 @@
 <body class="vetBack">
 
 <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="register" role="tabpanel" aria-labelledby="register-tab" align="center">
+    <div class="tab-pane fade show active" id="registerVisit" role="tabpanel" aria-labelledby="registerVisit-tab"
+         align="center">
         <div class="configureStyleMainForms">
 
             <!--Form to create a new visit in the vet-->
@@ -94,7 +96,7 @@
             </form>
         </div>
     </div>
-    <div class="tab-pane fade" id="find" role="tabpanel" aria-labelledby="find-tab" align="center">
+    <div class="tab-pane fade" id="VisitTablePet" role="tabpanel" aria-labelledby="VisitTablePet-tab" align="center">
         <div class="configureStyleMainBox">
             <h3 class="titles">Busqueda de visitas por fechas y nombre de la mascota</h3>
             <h5>Filtrar</h5>
@@ -123,12 +125,14 @@
                 <table id="myTablePets" class="table table-fluid">
                     <thead>
                     <tr>
-                        <th scope="col">Actualizar</th>
-                        <th scope="col">Identificación de la Veterinaria</th>
-                        <th scope="col">Identificación de la Mascota</th>
+                        <th scope="col">Identificación de la Visita</th>
                         <th scope="col">Fecha de la visita</th>
                         <th scope="col">Tipo de la visita</th>
                         <th scope="col">Descripción</th>
+                        <th scope="col">Microchip</th>
+                        <th scope="col">Nombre de la Veterinaria</th>
+                        <th scope="col">Identificación de la Mascota</th>
+                        <th scorpe="col">Nombre de la mascota</th>
                     </tr>
                     </thead>
                 </table>
@@ -136,7 +140,7 @@
 
         </div>
     </div>
-    <div class="tab-pane fade" id="Upuser" role="tabpanel" aria-labelledby="Upuser-tab" align="center">
+    <div class="tab-pane fade" id="UpVet" role="tabpanel" aria-labelledby="UpVet-tab" align="center">
         <div class="configureStyleMainForms">
 
             <!--Form to update the vet's user data-->

@@ -34,6 +34,7 @@ document.getElementById("listSingUp").onchange =
             }
             let inputButton = document.createElement("button");
             inputButton.id = "createButton";
+            inputButton.type="button";
             inputButton.textContent = "Registrar";
             inputButton.addEventListener("click", function createVet() {
 
@@ -74,6 +75,7 @@ document.getElementById("listSingUp").onchange =
             }
             let inputButton = document.createElement("button");
             inputButton.id = "createButton";
+            inputButton.type="button";
             inputButton.textContent = "Registrar";
             inputButton.addEventListener("click", function createOwner() {
                 //Takes and send the data to create a new owner user
