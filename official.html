@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="css/styles.css" type="text/css">
+    <script src="Javascript/official.js" type="module"></script>
 </head>
 <!-- Navigation of the owner interface -->
 <nav>
@@ -37,6 +38,14 @@
         <li class="nav-item">
             <a class="nav-link" id="officialPet-tab" data-toggle="tab" href="#officialPet" role="tab"
                aria-controls="officialPet" aria-selected="false">Tabla de Mascotas</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="officialCase-tab" data-toggle="tab" href="#officialCase" role="tab"
+               aria-controls="officialCase" aria-selected="false">Tabla de Casos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="officialVisit-tab" data-toggle="tab" href="#officialVisit" role="tab"
+               aria-controls="officialVisit" aria-selected="false">Tabla de Visitas</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="officialFilteredPet-tab" data-toggle="tab" href="#officialFilteredPet" role="tab"
@@ -79,6 +88,38 @@
         </div>
 
     </div>
+
+    <div class="tab-pane fade" id="officialCase" role="tabpanel" aria-labelledby="officialPet-tab" align="center">
+        <div class="configureStyleMainBox">
+            <h3 class="titles">Tabla de Casos</h3>
+            <!--Table that shows the pets in the official-->
+            <table id="myTableOfficialCases" class="table table-fluid">
+                <thead>
+                <tr>
+                    <th scope="col">Clasificación</th>
+                    <th scope="col">Total de Resultados</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <div class="tab-pane fade" id="officialVisit" role="tabpanel" aria-labelledby="officialPet-tab" align="center">
+        <div class="configureStyleMainBox">
+            <h3 class="titles">Tabla de Visitas</h3>
+            <!--Table that shows the pets in the official-->
+            <table id="myTableOfficialVisits" class="table table-fluid">
+                <thead>
+                <tr>
+                    <th scope="col">Clasificación</th>
+                    <th scope="col">Total de Resultados</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+
+    </div>
+
     <div class="tab-pane fade" id="officialFilteredPet" role="tabpanel" aria-labelledby="officialFilteredPet-tab"
          align="center">
         <div class="filters">
@@ -98,20 +139,32 @@
                 <input type="text" name="NamePet" size="30" id="NamePet">
                 <br>
                 <br>
-                <label for="SpeciePet">Especie de la mascota</label><br>
-                <input type="text" name="SpeciePet" size="30" id="SpeciePet">
-                <br>
-                <br>
                 <label for="RacePet">Raza de la mascota</label><br>
                 <input type="text" name="RacePet" size="30" id="RacePet">
                 <br>
                 <br>
-                <label for="SizePet">Tamaño de la mascota</label><br>
-                <input type="text" name="SizePet" size="30" id="SizePet">
+                <h6>Especie de la mascota</h6>
+                <label><input class="especies" type="checkbox" id="e1" value="Canino">Canino</label>
+                <br>
+                <label><input class="especies" type="checkbox" id="e2" value="Felino">Felino</label>
                 <br>
                 <br>
-                <label for="SexPet">Sexo de la mascota</label><br>
-                <input type="text" name="SexPet" size="30" id="SexPet">
+                <h6>Sexo de la mascota</h6>
+                <label><input class="sexes" type="checkbox" id="s1" value="Macho">Macho</label>
+                <br>
+                <label><input class="sexes" type="checkbox" id="s2" value="Hembra">Hembra</label>
+                <br>
+                <br>
+                <h6>Tamaño de la mascota</h6>
+                <label><input class="sizesToFilter" type="checkbox" id="t1" value="Muy grande">Muy grande</label>
+                <br>
+                <label><input class="sizesToFilter" type="checkbox" id="t2" value="Grande">Grande</label>
+                <br>
+                <label><input class="sizesToFilter" type="checkbox" id="t3" value="Mediano">Mediano</label>
+                <br>
+                <label><input class="sizesToFilter" type="checkbox" id="t4" value="Pequeño">Pequeño</label>
+                <br>
+                <label><input class="sizesToFilter" type="checkbox" id="t5" value="Miniatura">Miniatura</label>
                 <br>
                 <br>
                 <button class="btn btn-rounded btn-primary" id="filterOwner" type="button">Filtrar</button>
