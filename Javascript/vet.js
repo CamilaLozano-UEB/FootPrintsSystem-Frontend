@@ -20,9 +20,14 @@ selecttype.onchange = function controlMicrochip() {
  * Find the user in the url
  * @returns {string}
  */
+findUsername()
 function findUsername() {
     var url = window.location.href
     var part = url.split("?");
+    if (part[1] === undefined){
+        alert("Es necesario ingresar un usuario");
+        window.location.href="login.html";
+    }
     return (part[1])
 }
 

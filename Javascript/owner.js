@@ -8,9 +8,15 @@ var Userbutton = document.getElementById("Uuser");
  * Find the username in the url
  * @returns {string}
  */
+findUsername()
 function findUsername() {
-    var url = window.location.href
+    var url = window.location.href;
     var part = url.split("?");
+    if (part[1] === undefined){
+        alert("Es necesario ingresar un usuario");
+        window.location.href="login.html";
+    }
+
     return (part[1])
 }
 
