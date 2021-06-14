@@ -217,13 +217,13 @@ document.getElementById("find-tab").addEventListener("click", function () {
     var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/' + username;
     fetch(url, {
         method: 'GET'
-    }).then(response => response.json()).then(response => fillTables(response));
+    }).then(response => response.json()).then(response => fillPetsTable(response));
 });
 
-function fillTables(petList) {
+function fillPetsTable(petList) {
     let table = document.getElementById("myTableOwner");
     if (document.getElementById("tBodyPets") !== null) {
-        $('#myTableOwner').fnDestroy();
+        $('#myTableOwner').DataTable().destroy();
         table.removeChild(document.getElementById("tBodyPets"));
     }
     let tBody = document.createElement("tbody");
@@ -279,6 +279,8 @@ function updateButtonConfiguration(button) {
     button.href = "#update";
     button.setAttribute("data-toggle", "tab");
     button.addEventListener("click", function () {
+        document.getElementById("find-tab").className = "nav-link";
+        document.getElementById("update-tab").className = "nav-link active";
         document.getElementById("petid").value = button.id;
     })
 }
@@ -289,6 +291,8 @@ function caseButtonConfiguration(button) {
     button.href = "#petCase";
     button.setAttribute("data-toggle", "tab");
     button.addEventListener("click", function () {
+        document.getElementById("find-tab").className = "nav-link";
+        document.getElementById("petCase-tab").className = "nav-link active";
         document.getElementById("petidC").value = button.id;
     })
 }
@@ -298,7 +302,50 @@ function caseVisitButtonConfiguration(button) {
     button.textContent = "Ver casos y visitas";
     button.href = "#CaseAndVisits";
     button.setAttribute("data-toggle", "tab");
+
     button.addEventListener("click", function () {
+        document.getElementById("find-tab").className = "nav-link";
+        document.getElementById("CaseAndVisits-tab").className = "nav-link active";
         document.getElementById("petIdCV").value = button.id;
     })
+}
+
+document.getElementById("filter").addEventListener("click", function () {
+    var username = findUsername();
+    var url = new URL('http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' +
+        username + "/pets/" + document.getElementById("petIdCV").value + "/visitsCases")
+
+    var params = {lat: 35.696233, long: 139.570431} // or:
+    var params = [
+        ['initialDate', document.getElementById("Date1").value.replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1')],
+        ['finalDate', document.getElementById("Date2").value.replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1')]]
+
+    url.search = new URLSearchParams(params).toString();
+
+    fetch(url, {
+        method: 'GET'
+    }).then(response => response.json()).then(response => fillCasesAndVisitTable(response));
+});
+
+function fillCasesAndVisitTable(visitCaseList) {
+    let table = document.getElementById("myTableCaseVisitOwner");
+    if (document.getElementById("tBodyCaseVisit") !== null) {
+        $('#OwnerTableVisitsCase').DataTable().destroy();
+        table.removeChild(document.getElementById("tBodyCaseVisit"));
+    }
+    let tBody = document.createElement("tbody");
+    tBody.id = "tBodyCaseVisit";
+    if (visitCaseList.length === 0)
+        alert("No se encontró información");
+    for (let i = 0; i < visitCaseList.length; i++) {
+        const tr = document.createElement("tr");
+        for (const property in visitCaseList[i]) {
+            let td = document.createElement("td");
+            td.textContent = visitCaseList[i][property];
+            tr.appendChild(td);
+        }
+        tBody.appendChild(tr);
+        table.appendChild(tBody);
+    }
+    $('#myTableCaseVisitOwner').DataTable();
 }
