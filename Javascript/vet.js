@@ -134,7 +134,6 @@ vetButton.onclick = function () {
     location.reload();
 }
 
-//Aqui empezo lo feo
 
 document.getElementById("VisitTablePet-tab").addEventListener("click", function () {
 

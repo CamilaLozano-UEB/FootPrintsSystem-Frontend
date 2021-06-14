@@ -268,28 +268,28 @@ function fillPetsTable(petList) {
 
     for (let i = 0; i < petList.length; i++) {
         var tr = document.createElement("tr");
-
+        //Configure the update button
         var updateTd = document.createElement("td");
         var updateButton = document.createElement("a");
         updateButton.id = petList[i]["pet_id"];
         updateButtonConfiguration(updateButton);
         updateTd.appendChild(updateButton);
         tr.appendChild(updateTd);
-
+        //Configure the create case button
         var caseButton = document.createElement("a");
         var caseTd = document.createElement("td");
         caseButton.id = petList[i]["pet_id"];
         caseButtonConfiguration(caseButton);
         caseTd.appendChild(caseButton);
         tr.appendChild(caseTd);
-
+        //Configure the case and visit button
         var caseVisitButton = document.createElement("a");
         var caseVisitTd = document.createElement("td");
         caseVisitButton.id = petList[i]["pet_id"];
         caseVisitButtonConfiguration(caseVisitButton);
         caseVisitTd.appendChild(caseVisitButton);
         tr.appendChild(caseVisitTd);
-
+        //Fill the table
         for (const property in petList[i]) {
             if (property !== "owner_username") {
                 var td = document.createElement("td");
@@ -393,6 +393,7 @@ document.getElementById("filter").addEventListener("click", function () {
         alert("Para filtar es necesario ingresar las fechas");
         return;
     }
+    //Take the dates to the filter
     var params = [
         ['initialDate', document.getElementById("Date1").value.replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1')],
         ['finalDate', document.getElementById("Date2").value.replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1')]]
@@ -419,12 +420,14 @@ function fillCasesAndVisitTable(visitCaseList) {
     if (visitCaseList.length === 0)
         alert("No se encontró información");
     var cont=1;
+    //Create the cells
     for (let i = 0; i < visitCaseList.length; i++) {
         const tr = document.createElement("tr");
         let td = document.createElement("td");
         td.textContent = cont;
         tr.appendChild(td);
         cont++;
+        //assigns the cells and fill the table
         for (const property in visitCaseList[i]) {
             if (property === "createdAt") {
                 var d = new Date(visitCaseList[i][property]);
