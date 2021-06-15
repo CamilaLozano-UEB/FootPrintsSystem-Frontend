@@ -170,7 +170,7 @@ document.getElementById("listSingUp").onchange =
 function validateResponseOwner(res) {
     if ("se ha registrado correctamente" === res) {
         alert("Se creo el propietario correctamente");
-        window.location.href = "login.html";
+        window.location.href = "index.html";
     } else {
         alert("Ocurre un problema al crear el propietario, revise los datos ");
         location.reload();
@@ -184,7 +184,7 @@ function validateResponseOwner(res) {
 function validateResponseVet(res) {
     if ("se ha registrado correctamente la veterinaria" === res) {
         alert("Se creo la veterinaria correctamente");
-        window.location.href = "login.html";
+        window.location.href = "index.html";
     } else {
         alert("Ocurre un problema al crear la veterinaria, revise los datos ");
         location.reload();

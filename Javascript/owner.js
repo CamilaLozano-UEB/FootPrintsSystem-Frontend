@@ -15,7 +15,7 @@ function findUsername() {
     var part = url.split("?");
     if (part[1] === undefined) {
         alert("Es necesario ingresar un usuario");
-        window.location.href = "login.html";
+        window.location.href = "index.html";
     }
 
     return (part[1])
