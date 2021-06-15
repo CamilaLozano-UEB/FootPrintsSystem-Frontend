@@ -313,23 +313,23 @@ function fillFilteredPetsTable(petsFiltered) {
 function makeParams() {
     var params = [];
 
-    let petId = document.getElementById("IdPet").value;
-    if (isNaN(Number(petId))) {
-        alert("El id de la mascota debe ser un número");
+    let petId = document.getElementById("IdPet").value.trim();
+    if (isNaN(Number(petId))||Number(petId)===0) {
+        alert("El id de la mascota debe ser un número y diferente de cero");
         return;
     } else if (petId !== "") {
         params.push(['idF', petId])
     }
 
-    let microchipF = document.getElementById("MicrochipPet").value;
-    if (isNaN(Number(microchipF))) {
-        alert("El id de la mascota debe ser un número");
+    let microchipF = document.getElementById("MicrochipPet").value.trim();
+    if (isNaN(Number(microchipF))||Number(microchipF)===0) {
+        alert("El microchip de la mascota debe ser un número y diferente de cero");
         return;
     } else if (microchipF !== "") {
         params.push(['microchipF', microchipF])
     }
 
-    let nameF = document.getElementById("NamePet").value;
+    let nameF = document.getElementById("NamePet").value.trim();
     if (nameF !== "") params.push(['nameF', nameF]);
 
     let speciesToFilter = "";
@@ -344,7 +344,7 @@ function makeParams() {
         params.push(["speciesF", speciesToFilter]);
     }
 
-    let raceF = document.getElementById("RacePet").value;
+    let raceF = document.getElementById("RacePet").value.trim();
     if (raceF !== "") params.push(["raceF", raceF]);
 
     let sizesToFilter = "";

@@ -53,21 +53,25 @@ function createPet(fileD) {
     var username = findUsername();
     var microchip
     var url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' + username + '/pets';
-    if (document.getElementById("microchip").value === "") {
+    if (document.getElementById("microchip").value.trim() === "") {
         microchip = null;
     } else {
-        microchip = Number(document.getElementById("microchip").value)
+        microchip = Number(document.getElementById("microchip").value.trim())
     }
     if (isNaN(microchip) || document.formC.species[document.formC.species.selectedIndex].text === "Seleccione"
         || document.formC.size[document.formC.size.selectedIndex].text === "Seleccione" || document.formC.sex[document.formC.sex.selectedIndex].text === "Seleccione") {
         alert("Los datos ingresados son incorrectos");
         return;
     }
+    if(document.getElementById("name").value.trim()===""||document.getElementById("race").value.trim()===""){
+        alert("Es necesario llenar los campos de nombre, especie, tamaño y raza");
+        return;
+    }
     var data = {
         "microchip": microchip,
-        "name": document.getElementById("name").value,
+        "name": document.getElementById("name").value.trim(),
         "species": document.formC.species[document.formC.species.selectedIndex].text,
-        "race": document.getElementById("race").value,
+        "race": document.getElementById("race").value.trim(),
         "size": document.formC.size[document.formC.size.selectedIndex].text,
         "sex": document.formC.sex[document.formC.sex.selectedIndex].text,
         "picture": fileD
@@ -125,24 +129,28 @@ function updatePet(fileD) {
         fileD = "unknown.jpg"
     }
     var username = findUsername();
-    var pet_id = Number(document.getElementById("petid").value);
+    var pet_id = Number(document.getElementById("petid").value.trim());
     var microchip
     var url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' + username + '/pets/' + pet_id;
-    if (document.getElementById("microchipU").value === "") {
+    if (document.getElementById("microchipU").value.trim() === "") {
         microchip = null;
     } else {
-        microchip = Number(document.getElementById("microchipU").value)
+        microchip = Number(document.getElementById("microchipU").value.trim())
     }
     if (isNaN(microchip) || isNaN(pet_id) || document.formU.speciesU[document.formU.speciesU.selectedIndex].text === "Seleccione"
         || document.formU.sizeU[document.formU.sizeU.selectedIndex].text === "Seleccione" || document.formU.sexU[document.formU.sexU.selectedIndex].text === "Seleccione") {
         alert("Los datos ingresados son incorrectos");
         return;
     }
+    if (document.getElementById("nameU").value.trim()===""|| document.getElementById("raceU").value.trim()==="") {
+        alert("Es necesario llenar los campos de nombre, especie, tamaño y raza");
+        return;
+    }
     var data = {
         "microchip": microchip,
-        "name": document.getElementById("nameU").value,
+        "name": document.getElementById("nameU").value.trim(),
         "species": document.formU.speciesU[document.formU.speciesU.selectedIndex].text,
-        "race": document.getElementById("raceU").value,
+        "race": document.getElementById("raceU").value.trim(),
         "size": document.formU.sizeU[document.formU.sizeU.selectedIndex].text,
         "sex": document.formU.sexU[document.formU.sexU.selectedIndex].text,
         "picture": fileD
@@ -177,17 +185,21 @@ function validateUpPet(res) {
 
 Casebutton.onclick = function () {
     var username = findUsername();
-    var pet_id = Number(document.getElementById("petidC").value);
+    var pet_id = Number(document.getElementById("petidC").value.trim());
     var create_at = document.getElementById("caseDate").value;
     var url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/' + username + '/pet/' + pet_id + '/petCases';
     if (document.formCase.typeCase[document.formCase.typeCase.selectedIndex].text === "Seleccione" || isNaN(pet_id) || create_at === "") {
         alert("Los datos ingresados son incorrectos");
         return;
     }
+    if(document.formCase.typeCase[document.formCase.typeCase.selectedIndex].text === "Seleccione" || isNaN(pet_id) || create_at === ""||document.getElementById("description").value.trim()===""){
+        alert("Es necesario llenar todos los campos");
+        return;
+    }
     var data = {
         "created_at": create_at.replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1'),
         "type": document.formCase.typeCase[document.formCase.typeCase.selectedIndex].text,
-        "description": document.getElementById("description").value
+        "description": document.getElementById("description").value.trim()
     };
 
     //Send and create a post method in the rest backend
@@ -220,8 +232,8 @@ function validateMessage(res) {
 Userbutton.onclick = function () {
     var username = findUsername();
     var url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/' + username;
-    if (document.formUser.neighborhoodUser[document.formUser.neighborhoodUser.selectedIndex].text === "Seleccione") {
-        alert("Es necesario selecionar una localidad");
+    if (document.formUser.neighborhoodUser[document.formUser.neighborhoodUser.selectedIndex].text === "Seleccione"||document.getElementById("addressUser").value.trim()==="") {
+        alert("Es necesario selecionar una localidad y dirección");
         return;
     }
     var data = {
@@ -230,7 +242,7 @@ Userbutton.onclick = function () {
         "email": null,
         "person_id": 0,
         "name": null,
-        "address": document.getElementById("addressUser").value,
+        "address": document.getElementById("addressUser").value.trim(),
         "neighborhood": document.formUser.neighborhoodUser[document.formUser.neighborhoodUser.selectedIndex].text
     };
 
