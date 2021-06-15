@@ -290,7 +290,12 @@ function fillFilteredPetsTable(petsFiltered) {
 
             if (property === "picture") {
                 var image = document.createElement("img");
-                image.src = td.textContent;
+
+                if (td.textContent === "http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/image/unknown.jpg")
+                    image.src = "imgs/unknown.jpg";
+                else
+                    image.src = td.textContent;
+
                 image.width = document.body.clientWidth / 6;
                 td.textContent = "";
                 td.appendChild(image);

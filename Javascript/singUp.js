@@ -26,6 +26,7 @@ document.getElementById("listSingUp").onchange =
                 label.setAttribute("for", listAtributesVet[i]);
                 label.textContent = listTitlesVet[i];
                 div.appendChild(label);
+                div.appendChild(document.createElement("br"));
                 var input = document.createElement("input");
                 input.setAttribute("name", listAtributesVet[i]);
                 input.setAttribute("id", listAtributesVet[i]);
@@ -67,6 +68,7 @@ document.getElementById("listSingUp").onchange =
                 label.setAttribute("for", listTitlesOwner[i]);
                 label.textContent = listTitlesOwner[i];
                 div.appendChild(label);
+                div.appendChild(document.createElement("br"));
                 var input = document.createElement("input");
                 input.setAttribute("name", listAtributesOwner[i]);
                 input.setAttribute("id", listAtributesOwner[i]);
