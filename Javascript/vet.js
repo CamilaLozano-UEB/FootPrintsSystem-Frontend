@@ -36,24 +36,28 @@ function findUsername() {
  */
 visitButton.onclick = function () {
     var username = findUsername();
-    var pet_id = Number(document.getElementById("petId").value);
+    var pet_id = Number(document.getElementById("petId").value.trim());
     var create_at = document.getElementById("CreatAt").value;
     var type = document.formVC.type[document.formVC.type.selectedIndex].text
     var url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/vet/' + username + '/visits';
 
     //If the visit is for implantation microchip, take the microchip value and send it
     if (type === "Implantación de microchip") {
-        var microchip = Number(document.getElementById("microchip").value);
+        var microchip = Number(document.getElementById("microchip").value.trim());
         type = "implantación de microchip";
         if (isNaN(microchip) || isNaN(pet_id) || type === "Seleccione") {
             alert("Los datos ingresados son incorrectos");
+            return;
+        }
+        if (isNaN(microchip) || isNaN(pet_id) || type === "Seleccione"||document.getElementById("description").value.trim()==="") {
+            alert("Deben llenarse todos los campos");
             return;
         }
         var data = {
             "created_at": create_at.replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1'),
             "type": type,
             "microchip": microchip,
-            "description": document.getElementById("description").value,
+            "description": document.getElementById("description").value.trim(),
             "pet_id": pet_id
         };
 
@@ -71,10 +75,14 @@ visitButton.onclick = function () {
             alert("Los datos ingresados son incorrectos");
             return;
         }
+        if (isNaN(pet_id) || type === "Seleccione"||document.getElementById("description").value.trim()==="") {
+            alert("Deben llenarse todo los campos");
+            return;
+        }
         var data = {
             "created_at": create_at.replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1'),
             "type": type,
-            "description": document.getElementById("description").value,
+            "description": document.getElementById("description").value.trim(),
             "pet_id": pet_id
         };
         fetch(url, {
@@ -107,8 +115,8 @@ function showAlert(res) {
 vetButton.onclick = function () {
     var username = findUsername();
     var url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/vet/' + username;
-    if (document.formUser.neighborhoodUser[document.formUser.neighborhoodUser.selectedIndex].text === "Seleccione") {
-        alert("Es necesario selecionar una localidad");
+    if (document.formUser.neighborhoodUser[document.formUser.neighborhoodUser.selectedIndex].text === "Seleccione"||document.getElementById("addressUser").value.trim()==="" ) {
+        alert("Es necesario selecionar una localidad y dirección");
         return;
     }
 
@@ -117,7 +125,7 @@ vetButton.onclick = function () {
         "password": null,
         "email": null,
         "name": null,
-        "address": document.getElementById("addressUser").value,
+        "address": document.getElementById("addressUser").value.trim(),
         "neighborhood": document.formUser.neighborhoodUser[document.formUser.neighborhoodUser.selectedIndex].text
     };
 
@@ -191,6 +199,12 @@ function filterTableVet() {
     var url = new URL('http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/vet/' +
         username + "/visits/")
 
+    var date1 = document.getElementById("Date1").value;
+    var date2 = document.getElementById("Date2").value;
+    if (date1 === "" || date2 === ""|| document.getElementById("PetName").value==="") {
+        alert("Para filtar es necesario ingresar las fechas y el nombre");
+        return;
+    }
     //Params for the filter
     var params = [['petName', document.getElementById("PetName").value],
         ['initialDate', document.getElementById("Date1").value.replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1')],
