@@ -19,6 +19,8 @@
 	<dd>https://github.com/CamilaLozano-UEB/FourPawsCitizens-FootprintsSystem</dd>
   <dd>https://github.com/CamilaLozano-UEB/FootPrintsSystem-Frontend</dd>
 	<br>
+<dd><b>3.2.</b> Link de Github Pages</dd>
+<dd>https://camilalozano-ueb.github.io/FootPrintsSystem-Frontend/</dd>
 	<dd><b>3.2.</b> Link de Youtube</dd>
 	<dd> </dd>
 	<br>
