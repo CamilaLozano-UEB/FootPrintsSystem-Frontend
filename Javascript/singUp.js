@@ -7,17 +7,21 @@ document.getElementById("listSingUp").onchange =
     function () {
         var fieldSetForm = document.getElementById("fieldSetForm");
         var form = document.getElementById("formSingUp");
-        var listTitlesVet = ["Usuario: ", "Contraseña:", "Email: ", "Nombre de la Veterinaria: ", "Direccion: ", "Localidad:"];
-        var listTitlesOwner = ["Usuario: ", "Contraseña:", "Email: ", "Documento de identidad: ", "Nombre Completo: ", "Direccion: ", "Localidad: "];
-        var listAtributesVet = ["usernameVet", "passwordVet", "emailVet", "nameVet", "addressVet", "neigborhoodVet"];
-        var listAtributesOwner = ["username", "password", "email", "person_id", "name", "address", "neighborhood"];
+        var listTitlesVet = ["Usuario: ", "Contraseña:", "Email: ", "Nombre de la Veterinaria: ", "Direccion: "];
+        var listTitlesOwner = ["Usuario: ", "Contraseña:", "Email: ", "Documento de identidad: ", "Nombre Completo: ", "Direccion: "];
+        var listAtributesVet = ["usernameVet", "passwordVet", "emailVet", "nameVet", "addressVet"];
+        var listAtributesOwner = ["username", "password", "email", "person_id", "name", "address"];
+        let neighborhoods = ["Seleccione", "Usaquen", "Chapinero", "Santa Fe", "San Cristobal", "Usme", "Tunjuelito", "Bosa", "Kennedy", "Fontibon", "Engativa", "Suba", "Barrios Unidos"
+            , "Teusaquillo", "Los Martires", "Antonio Nariño", "Puente Aranda", "La Candelaria", "Uribe", "Ciudad Bolivar", "Sumapaz", "Municipios aledaños"];
         var role = document.getElementById("listSingUp").value;
 
         if (fieldSetForm.hasChildNodes()) {
             fieldSetForm.removeChild(fieldSetForm.firstChild);
             form.removeChild(document.getElementById("createButton"));
         }
+
         var div = document.createElement("div");
+        div.name = "divForm";
 
         //Shows the form for a vet
         if (role === "vetSelect") {
@@ -27,7 +31,9 @@ document.getElementById("listSingUp").onchange =
                 label.textContent = listTitlesVet[i];
                 div.appendChild(label);
                 div.appendChild(document.createElement("br"));
+
                 var input = document.createElement("input");
+                if (listAtributesVet[i] === "passwordVet") input.type = "password";
                 input.setAttribute("name", listAtributesVet[i]);
                 input.setAttribute("id", listAtributesVet[i]);
                 div.appendChild(input);
@@ -35,9 +41,13 @@ document.getElementById("listSingUp").onchange =
             }
             let inputButton = document.createElement("button");
             inputButton.id = "createButton";
-            inputButton.type="button";
+            inputButton.type = "button";
             inputButton.textContent = "Registrar";
             inputButton.addEventListener("click", function createVet() {
+                if (document.formSingUp.neighborhoodVet[document.formSingUp.neighborhoodVet.selectedIndex].text === "Seleccione") {
+                    alert("Es necesario selecionar una localidad");
+                    return;
+                }
 
                 //Create the vet's user
                 var url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/vet';
@@ -47,7 +57,7 @@ document.getElementById("listSingUp").onchange =
                     "email": document.getElementById("emailVet").value,
                     "name": document.getElementById("nameVet").value,
                     "address": document.getElementById("addressVet").value,
-                    "neighborhood": document.getElementById("neigborhoodVet").value
+                    "neighborhood": document.formSingUp.neighborhoodVet[document.formSingUp.neighborhoodVet.selectedIndex].text
                 };
 
                 fetch(url, {
@@ -58,18 +68,37 @@ document.getElementById("listSingUp").onchange =
                     }
                 }).then(res => res.text()).then(res => validateResponseVet(res));
             })
+            let neighborhoodLabel = document.createElement("label");
+            neighborhoodLabel.for = "neighborhoodVet";
+            neighborhoodLabel.textContent = "Localidad:";
+            div.appendChild(neighborhoodLabel);
+            div.appendChild(document.createElement("br"));
+
+            let select = document.createElement('select');
+            select.id = "neighborhoodVet";
+            select.name = "neighborhoodVet";
+
+            for (const neighborhood of neighborhoods) {
+                let option = document.createElement("option");
+                option.textContent = neighborhood;
+                select.appendChild(option);
+            }
+            div.appendChild(select);
 
             fieldSetForm.appendChild(div);
             form.appendChild(inputButton);
             //Shows the form for the creation of a owner's user
         } else if (role === "ownerSelect") {
+
             for (var i = 0; i < listTitlesOwner.length; i++) {
                 var label = document.createElement("label");
                 label.setAttribute("for", listTitlesOwner[i]);
                 label.textContent = listTitlesOwner[i];
                 div.appendChild(label);
                 div.appendChild(document.createElement("br"));
+
                 var input = document.createElement("input");
+                if (listAtributesOwner[i] === "password") input.type = "password";
                 input.setAttribute("name", listAtributesOwner[i]);
                 input.setAttribute("id", listAtributesOwner[i]);
                 div.appendChild(input);
@@ -77,10 +106,15 @@ document.getElementById("listSingUp").onchange =
             }
             let inputButton = document.createElement("button");
             inputButton.id = "createButton";
-            inputButton.type="button";
+            inputButton.type = "button";
             inputButton.textContent = "Registrar";
             inputButton.addEventListener("click", function createOwner() {
                 //Takes and send the data to create a new owner user
+                if (document.formSingUp.neighborhood[document.formSingUp.neighborhood.selectedIndex].text === "Seleccione") {
+                    alert("Es necesario selecionar una localidad");
+                    return;
+                }
+
                 var url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners';
                 var person_id = Number(document.getElementById("person_id").value)
                 if (isNaN(person_id)) {
@@ -94,7 +128,7 @@ document.getElementById("listSingUp").onchange =
                     "person_id": person_id,
                     "name": document.getElementById("name").value,
                     "address": document.getElementById("address").value,
-                    "neighborhood": document.getElementById("neighborhood").value
+                    "neighborhood": document.formSingUp.neighborhood[document.formSingUp.neighborhood.selectedIndex].text
                 };
 
                 fetch(url, {
@@ -105,6 +139,21 @@ document.getElementById("listSingUp").onchange =
                     }
                 }).then(res => res.text()).then(res => validateResponseOwner(res));
             })
+            let neighborhoodLabel = document.createElement("label");
+            neighborhoodLabel.for = "neighborhood";
+            neighborhoodLabel.textContent = "Localidad:";
+            div.appendChild(neighborhoodLabel);
+            div.appendChild(document.createElement("br"));
+
+            let select = document.createElement('select');
+            select.id = "neighborhood";
+            select.name = "neighborhood";
+            for (const neighborhood of neighborhoods) {
+                let option = document.createElement("option");
+                option.textContent = neighborhood;
+                select.appendChild(option);
+            }
+            div.appendChild(select);
 
             fieldSetForm.appendChild(div);
             form.appendChild(inputButton);

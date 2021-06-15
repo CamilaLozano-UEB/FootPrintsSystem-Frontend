@@ -190,7 +190,7 @@ document.getElementById("officialVisit-tab").addEventListener("click", function 
         alert("Access denied")
         return
     }
-    var url = new URL('http://35.206.97.221:8080/ourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/official/' +
+    var url = new URL('http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/official/' +
         username + '/totalVisits');
 
     fetch(url, {
