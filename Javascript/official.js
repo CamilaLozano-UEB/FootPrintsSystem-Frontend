@@ -260,7 +260,7 @@ function fillFilteredPetsTableAction() {
 
     let params = makeParams();
 
-    if (params[0] !== undefined)
+    if (params !== undefined)
         url.search = new URLSearchParams(params).toString();
 
     fetch(url, {
@@ -351,7 +351,7 @@ function makeParams() {
     let sizes = document.getElementsByClassName("sizesToFilter");
     for (let i = 0; i < sizes.length; i++) {
         if (sizes[i].checked) {
-            sizesToFilter += species[i].value + ",";
+            sizesToFilter += sizes[i].value + ",";
         }
     }
     if (sizesToFilter !== "") {
