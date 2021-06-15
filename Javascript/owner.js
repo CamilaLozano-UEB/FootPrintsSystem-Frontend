@@ -9,12 +9,13 @@ var Userbutton = document.getElementById("Uuser");
  * @returns {string}
  */
 findUsername()
+
 function findUsername() {
     var url = window.location.href;
     var part = url.split("?");
-    if (part[1] === undefined){
+    if (part[1] === undefined) {
         alert("Es necesario ingresar un usuario");
-        window.location.href="login.html";
+        window.location.href = "login.html";
     }
 
     return (part[1])
@@ -25,7 +26,7 @@ function findUsername() {
  */
 Cbutton.onclick = function () {
     var photo = document.getElementById("imagePet");
-    var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/upload';
+    var url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/upload';
 
     const formData = new FormData();
     formData.append('file', photo.files[0]);
@@ -42,15 +43,16 @@ Cbutton.onclick = function () {
  * @param fileD the name of the photo
  */
 function createPet(fileD) {
-    if(fileD==="No es una imagen"){
+    if (fileD === "No es una imagen") {
         alert("El archivo adjuntado no es una image")
         return;
-    }if(fileD === "unknown"){
-        fileD= "unknown.jpg"
+    }
+    if (fileD === "unknown") {
+        fileD = "unknown.jpg"
     }
     var username = findUsername();
     var microchip
-    var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' + username + '/pets';
+    var url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' + username + '/pets';
     if (document.getElementById("microchip").value === "") {
         microchip = null;
     } else {
@@ -98,7 +100,7 @@ function validateNewPet(res) {
  */
 Ubutton.onclick = function () {
     var photo = document.getElementById("imagePetU");
-    var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/upload';
+    var url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/upload';
 
     const formData = new FormData();
     formData.append('file', photo.files[0]);
@@ -109,21 +111,23 @@ Ubutton.onclick = function () {
     }).then(res => res.text())
         .then(res => updatePet(res));
 }
+
 /**
  *  Get the parameters of the form and send it to the rest in backend for update a pet
  * @param fileD the name of the photo
  */
 function updatePet(fileD) {
-    if(fileD==="No es una imagen"){
+    if (fileD === "No es una imagen") {
         alert("El archivo adjuntado no es una image")
         return;
-    }if(fileD === "unknown"){
-        fileD= "unknown.jpg"
+    }
+    if (fileD === "unknown") {
+        fileD = "unknown.jpg"
     }
     var username = findUsername();
     var pet_id = Number(document.getElementById("petid").value);
     var microchip
-    var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' + username + '/pets/' + pet_id;
+    var url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' + username + '/pets/' + pet_id;
     if (document.getElementById("microchipU").value === "") {
         microchip = null;
     } else {
@@ -175,8 +179,8 @@ Casebutton.onclick = function () {
     var username = findUsername();
     var pet_id = Number(document.getElementById("petidC").value);
     var create_at = document.getElementById("caseDate").value;
-    var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/' + username + '/pet/' + pet_id + '/petCases';
-    if (document.formCase.typeCase[document.formCase.typeCase.selectedIndex].text === "Seleccione" || isNaN(pet_id)||create_at==="") {
+    var url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/' + username + '/pet/' + pet_id + '/petCases';
+    if (document.formCase.typeCase[document.formCase.typeCase.selectedIndex].text === "Seleccione" || isNaN(pet_id) || create_at === "") {
         alert("Los datos ingresados son incorrectos");
         return;
     }
@@ -196,6 +200,7 @@ Casebutton.onclick = function () {
     }).then(res => res.text())
         .then(res => validateMessage(res));
 }
+
 /**
  *Valid the response message
  * @param res the response message
@@ -214,7 +219,7 @@ function validateMessage(res) {
  */
 Userbutton.onclick = function () {
     var username = findUsername();
-    var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/' + username;
+    var url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/' + username;
     if (document.formUser.neighborhoodUser[document.formUser.neighborhoodUser.selectedIndex].text === "Seleccione") {
         alert("Es necesario selecionar una localidad");
         return;
@@ -247,7 +252,7 @@ Userbutton.onclick = function () {
 document.getElementById("find-tab").addEventListener("click", function () {
 
     var username = findUsername();
-    var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/' + username;
+    var url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owner/' + username;
     fetch(url, {
         method: 'GET'
     }).then(response => response.json()).then(response => fillPetsTable(response));
@@ -296,12 +301,12 @@ function fillPetsTable(petList) {
                 td.textContent = petList[i][property];
                 if (property === "picture") {
                     var image = document.createElement("img");
-                    if(petList[i][property]==="http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/image/unknown.jpg"){
-                        image.src ="imgs/unknown.jpg";
+                    if (petList[i][property] === 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/image/unknown.jpg') {
+                        image.src = "imgs/unknown.jpg";
                         image.width = document.body.clientWidth / 6;
                         td.textContent = "";
                         td.appendChild(image);
-                    }else{
+                    } else {
                         image.src = td.textContent;
                         image.width = document.body.clientWidth / 6;
                         td.textContent = "";
@@ -314,7 +319,8 @@ function fillPetsTable(petList) {
         }
         tBody.appendChild(tr);
 
-    } table.appendChild(tBody);
+    }
+    table.appendChild(tBody);
     $('#myTableOwner').DataTable();
 }
 
@@ -333,6 +339,7 @@ function updateButtonConfiguration(button) {
         document.getElementById("petid").value = button.id;
     })
 }
+
 /**
  * The button is configured anf add the listener
  * @param button the button of update
@@ -348,6 +355,7 @@ function caseButtonConfiguration(button) {
         document.getElementById("petidC").value = button.id;
     })
 }
+
 /**
  * The button is configured anf add the listener
  * @param button the button of update
@@ -371,7 +379,7 @@ function caseVisitButtonConfiguration(button) {
  */
 function dotableVisitCase() {
     var username = findUsername();
-    var url = new URL('http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' +
+    var url = new URL('http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' +
         username + "/pets/" + document.getElementById("petIdCV").value + "/visitsCasesAll")
 
     fetch(url, {
@@ -384,12 +392,12 @@ function dotableVisitCase() {
  */
 document.getElementById("filter").addEventListener("click", function () {
     var username = findUsername();
-    var url = new URL('http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' +
+    var url = new URL('http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners/' +
         username + "/pets/" + document.getElementById("petIdCV").value + "/visitsCases")
 
     var date1 = document.getElementById("Date1").value;
     var date2 = document.getElementById("Date2").value;
-    if (date1===""||date2==="") {
+    if (date1 === "" || date2 === "") {
         alert("Para filtar es necesario ingresar las fechas");
         return;
     }
@@ -419,7 +427,7 @@ function fillCasesAndVisitTable(visitCaseList) {
     tBody.id = "tBodyCaseVisit";
     if (visitCaseList.length === 0)
         alert("No se encontró información");
-    var cont=1;
+    var cont = 1;
     //Create the cells
     for (let i = 0; i < visitCaseList.length; i++) {
         const tr = document.createElement("tr");
@@ -431,11 +439,11 @@ function fillCasesAndVisitTable(visitCaseList) {
         for (const property in visitCaseList[i]) {
             if (property === "createdAt") {
                 var d = new Date(visitCaseList[i][property]);
-                var date = +d.getDate()  + "/" + (d.getMonth()+1) + "/" + d.getFullYear() ;
+                var date = +d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
                 let td = document.createElement("td");
                 td.textContent = date;
                 tr.appendChild(td);
-            }else{
+            } else {
                 let td = document.createElement("td");
                 td.textContent = visitCaseList[i][property];
                 tr.appendChild(td);
@@ -444,6 +452,7 @@ function fillCasesAndVisitTable(visitCaseList) {
         }
         tBody.appendChild(tr);
 
-    }table.appendChild(tBody);
+    }
+    table.appendChild(tBody);
     $('#myTableCaseVisitOwner').DataTable();
 }

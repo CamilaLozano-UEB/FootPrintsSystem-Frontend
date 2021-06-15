@@ -3,7 +3,7 @@
  */
 document.getElementById("logButton").onclick =
     function findRole() {
-        let url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/userApp';
+        let url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/userApp';
         let username = document.getElementById("user").value;
         let password = document.getElementById("password").value;
 
@@ -34,7 +34,7 @@ function redirect(role) {
         var rolhref = role + ".html";
         if (role === "owner")
             role = "owners";
-        let url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/' + role;
+        let url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/' + role;
 
         let username = document.getElementById("user").value;
         let password = document.getElementById("password").value;

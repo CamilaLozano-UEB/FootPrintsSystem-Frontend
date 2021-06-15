@@ -16,7 +16,7 @@ function tabListener() {
         alert("Access denied")
         return
     }
-    var url = new URL('http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/official/' +
+    var url = new URL('http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/official/' +
         username + '/totalOwners');
 
     fetch(url, {
@@ -70,7 +70,7 @@ document.getElementById("officialPet-tab").addEventListener("click", function ()
         alert("Access denied")
         return
     }
-    var url = new URL('http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/official/' +
+    var url = new URL('http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/official/' +
         username + '/totalPets');
 
     fetch(url, {
@@ -138,7 +138,7 @@ document.getElementById("officialCase-tab").addEventListener("click", function (
         alert("Access denied")
         return
     }
-    var url = new URL('http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/official/' +
+    var url = new URL('http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/official/' +
         username + '/totalCases');
 
     fetch(url, {
@@ -190,7 +190,7 @@ document.getElementById("officialVisit-tab").addEventListener("click", function 
         alert("Access denied")
         return
     }
-    var url = new URL('http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/official/' +
+    var url = new URL('http://35.206.97.221:8080/ourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/official/' +
         username + '/totalVisits');
 
     fetch(url, {
@@ -255,7 +255,7 @@ function fillFilteredPetsTableAction() {
         alert("Access denied")
         return
     }
-    let url = new URL('http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/official/' +
+    let url = new URL('http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/official/' +
         username + '/pets');
 
     let params = makeParams();
@@ -291,7 +291,7 @@ function fillFilteredPetsTable(petsFiltered) {
             if (property === "picture") {
                 var image = document.createElement("img");
 
-                if (td.textContent === "http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/image/unknown.jpg")
+                if (td.textContent === 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/image/unknown.jpg')
                     image.src = "imgs/unknown.jpg";
                 else
                     image.src = td.textContent;

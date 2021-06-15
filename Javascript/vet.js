@@ -39,7 +39,7 @@ visitButton.onclick = function () {
     var pet_id = Number(document.getElementById("petId").value);
     var create_at = document.getElementById("CreatAt").value;
     var type = document.formVC.type[document.formVC.type.selectedIndex].text
-    var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/vet/' + username + '/visits';
+    var url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/vet/' + username + '/visits';
 
     //If the visit is for implantation microchip, take the microchip value and send it
     if (type === "Implantación de microchip") {
@@ -106,7 +106,7 @@ function showAlert(res) {
  */
 vetButton.onclick = function () {
     var username = findUsername();
-    var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/vet/' + username;
+    var url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/vet/' + username;
     if (document.formUser.neighborhoodUser[document.formUser.neighborhoodUser.selectedIndex].text === "Seleccione") {
         alert("Es necesario selecionar una localidad");
         return;
@@ -138,7 +138,7 @@ vetButton.onclick = function () {
 document.getElementById("VisitTablePet-tab").addEventListener("click", function () {
 
     var username = findUsername();
-    var url = new URL('http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/vet/' +
+    var url = new URL('http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/vet/' +
         username + "/visits/All")
     fetch(url, {
         method: 'GET'
@@ -188,7 +188,7 @@ document.getElementById("filter").addEventListener("click", filterTableVet);
 function filterTableVet() {
 
     var username = findUsername();
-    var url = new URL('http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/vet/' +
+    var url = new URL('http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/vet/' +
         username + "/visits/")
 
     //Params for the filter

@@ -40,7 +40,7 @@ document.getElementById("listSingUp").onchange =
             inputButton.addEventListener("click", function createVet() {
 
                 //Create the vet's user
-                var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/vet';
+                var url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/vet';
                 var data = {
                     "username": document.getElementById("usernameVet").value,
                     "password": document.getElementById("passwordVet").value,
@@ -81,7 +81,7 @@ document.getElementById("listSingUp").onchange =
             inputButton.textContent = "Registrar";
             inputButton.addEventListener("click", function createOwner() {
                 //Takes and send the data to create a new owner user
-                var url = 'http://localhost:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners';
+                var url = 'http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/owners';
                 var person_id = Number(document.getElementById("person_id").value)
                 if (isNaN(person_id)) {
                     alert("La identificación debe ser numerica");
