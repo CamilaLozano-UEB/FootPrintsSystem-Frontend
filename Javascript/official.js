@@ -247,7 +247,7 @@ function fillTotalVisitsTable(totalVisits) {
 
 document.getElementById("filterOwner").addEventListener("click", fillFilteredPetsTableAction);
 
-fillFilteredPetsTableAction();
+fillFilteredPetsTableActionAll();
 
 function fillFilteredPetsTableAction() {
     var username = findUsername();
@@ -268,6 +268,20 @@ function fillFilteredPetsTableAction() {
     }).then(response => response.json()).then(response => fillFilteredPetsTable(response));
 }
 
+function fillFilteredPetsTableActionAll() {
+    var username = findUsername();
+    if (username === undefined) {
+        alert("Access denied")
+        return
+    }
+    let url = new URL('http://35.206.97.221:8080/FourPawsCitizens-FootprintsSystem-1.0-SNAPSHOT/api/official/' +
+        username + '/pets');
+
+
+    fetch(url, {
+        method: 'GET'
+    }).then(response => response.json()).then(response => fillFilteredPetsTable(response));
+}
 function fillFilteredPetsTable(petsFiltered) {
     let table = document.getElementById("myTableOfficialFilters");
 
@@ -312,19 +326,16 @@ function fillFilteredPetsTable(petsFiltered) {
 
 function makeParams() {
     var params = [];
-
     let petId = document.getElementById("IdPet").value.trim();
     if (isNaN(Number(petId))||Number(petId)===0) {
-        alert("El id de la mascota debe ser un número y diferente de cero");
-        return;
+        alert("Recuerde: El id de la mascota debe ser un número y diferente de cero");
     } else if (petId !== "") {
         params.push(['idF', petId])
     }
 
     let microchipF = document.getElementById("MicrochipPet").value.trim();
     if (isNaN(Number(microchipF))||Number(microchipF)===0) {
-        alert("El microchip de la mascota debe ser un número y diferente de cero");
-        return;
+        alert("Recuerde: El microchip de la mascota debe ser un número y diferente de cero");
     } else if (microchipF !== "") {
         params.push(['microchipF', microchipF])
     }
